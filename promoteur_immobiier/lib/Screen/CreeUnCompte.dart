@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:promoteur_immobiier/WIdgets/container.dart';
+import 'package:promoteur_immobiier/WIdgets/LoginDesing/containerlogin.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 import 'login.dart';
 
 class SignUpPage extends StatefulWidget {

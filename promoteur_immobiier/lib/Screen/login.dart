@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:promoteur_immobiier/Screen/CreeUnCompte.dart';
-import 'package:promoteur_immobiier/Screen/constants.dart';
+import 'package:promoteur_immobiier/WIdgets/LoginDesing/containerlogin.dart';
 
-import 'package:promoteur_immobiier/WIdgets/container.dart';
+import '../constants.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);

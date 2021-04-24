@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:promoteur_immobiier/WIdgets/navbar.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 
 class PageAcceuil extends StatefulWidget {
   PageAcceuil({Key key}) : super(key: key);

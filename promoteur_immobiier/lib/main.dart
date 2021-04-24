@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:promoteur_immobiier/Screen/PageAccuiel.dart';
-import 'package:promoteur_immobiier/Screen/ProjetEncours.dart';
 
-import 'Screen/login.dart';
-import 'Screen/realise.dart';
-import 'hoteltry.dart';
+import 'package:promoteur_immobiier/Screen/ProjetEncours.dart';
+import 'package:promoteur_immobiier/Screen/login.dart';
+
+import 'Screen/Projetrealise.dart';
+import 'Screen/TestPageAccueil.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
         title: 'Named Routes Demo',
         initialRoute: '/PageAccuiel',
         routes: {
-          '/PageAccuiel': (context) => PageAcceuil(),
+          '/PageAccuiel': (context) => HomePage(),
           '/Realise': (context) => Realise(),
-          '/ProjetEncours': (context) => ProjetEncours(),
-          '/login': (context) => Hol(),
+          '/ProjetEncours': (context) => ProjetEnCours(),
+          '/login': (context) => LoginPage(),
         });
   }
 }

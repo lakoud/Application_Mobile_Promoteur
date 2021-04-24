@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:promoteur_immobiier/Screen/constants.dart';
+
+import '../constants.dart';
 
 class Nav extends StatefulWidget {
   Nav({Key key}) : super(key: key);

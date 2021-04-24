@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:promoteur_immobiier/Screen/constants.dart';
+import 'package:promoteur_immobiier/constants.dart';
 
-import 'clipContainer.dart';
+import 'clipContainerAccueil.dart';
 
-class BezierContainer extends StatelessWidget {
-  const BezierContainer({Key key}) : super(key: key);
+class BezierContainer2 extends StatelessWidget {
+  const BezierContainer2({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class BezierContainer extends StatelessWidget {
         child: Transform.rotate(
       angle: -pi / 3.5,
       child: ClipPath(
-        clipper: ClipPainter(),
+        clipper: ClipPainter2(),
         child: Container(
           height: MediaQuery.of(context).size.height * .5,
           width: MediaQuery.of(context).size.width,
