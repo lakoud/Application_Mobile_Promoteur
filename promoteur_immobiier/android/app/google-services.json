@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "469630042506",
+    "project_id": "applicationmobilepromoteur",
+    "storage_bucket": "applicationmobilepromoteur.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469630042506:android:a7e74760d764a3aa0bc873",
+        "android_client_info": {
+          "package_name": "com.example.promoteur_immobiier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469630042506-4a27r29ebracasnfjj6lf9ord7bnqgc3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.promoteur_immobiier",
+            "certificate_hash": "f54fd8bf58042709e09d71592041acdbf9e12225"
+          }
+        },
+        {
+          "client_id": "469630042506-gse0a7olvcmjhlg75cqmdssjhoeuejks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc8RpdtjTKZcR2n1jEiZFptPiDZCxL-hI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469630042506-gse0a7olvcmjhlg75cqmdssjhoeuejks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

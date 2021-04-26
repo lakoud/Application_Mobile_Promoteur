@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:carousel_pro/carousel_pro.dart';
 
 import 'package:flutter/material.dart';
-import 'package:promoteur_immobiier/WIdgets/BotoomNavBarAnimation.dart';
-import 'package:promoteur_immobiier/WIdgets/Custom_Text.dart';
+import 'package:promoteur_immobiier/view/WIdgets/BotoomNavBarAnimation.dart';
+import 'package:promoteur_immobiier/view/WIdgets/Custom_Text.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class ProjetEnCours extends StatefulWidget {
   const ProjetEnCours({Key key}) : super(key: key);

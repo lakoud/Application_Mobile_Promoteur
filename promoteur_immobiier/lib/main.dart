@@ -1,21 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:promoteur_immobiier/view/auth/login.dart';
+import 'package:promoteur_immobiier/view/screen/Projetrealise.dart';
+import 'package:promoteur_immobiier/view/screen/TestPageAccueil.dart';
+import 'package:promoteur_immobiier/view/screen/projetencours.dart';
 
-import 'package:promoteur_immobiier/Screen/ProjetEncours.dart';
-import 'package:promoteur_immobiier/Screen/login.dart';
+import 'helper/binding.dart';
 
-import 'Screen/Projetrealise.dart';
-import 'Screen/TestPageAccueil.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
-void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+        initialBinding: Binding(),
         debugShowCheckedModeBanner: false,
-        title: 'Named Routes Demo',
         initialRoute: '/PageAccuiel',
         routes: {
           '/PageAccuiel': (context) => HomePage(),

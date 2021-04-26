@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class Nav extends StatefulWidget {
   Nav({Key key}) : super(key: key);
@@ -23,7 +23,7 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.phone), label: 'Nous applons'),
+        BottomNavigationBarItem(icon: Icon(Icons.phone), label: '+21655591112'),
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
