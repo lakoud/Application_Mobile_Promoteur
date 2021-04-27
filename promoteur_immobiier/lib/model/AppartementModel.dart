@@ -1,13 +1,15 @@
 class AppartementModel {
-  String type, image, surface, prix, residence, description;
+  String type, image, surface, prix, residence, description, plan;
 
-  AppartementModel(
-      {this.type,
-      this.image,
-      this.surface,
-      this.description,
-      this.prix,
-      this.residence});
+  AppartementModel({
+    this.type,
+    this.image,
+    this.surface,
+    this.description,
+    this.prix,
+    this.residence,
+    this.plan,
+  });
 
   AppartementModel.fromJson(Map<dynamic, dynamic> map) {
     if (map == null) {
@@ -20,9 +22,11 @@ class AppartementModel {
     description = map['description'];
     prix = map['Prix'];
     residence = map['residence'];
+    plan = map['plan'];
   }
   toJson() {
     return {
+      'plan': plan,
       'Type': type,
       'Photo': image,
       'Surface': surface,

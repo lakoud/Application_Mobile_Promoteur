@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:promoteur_immobiier/view/WIdgets/Custom_Text.dart';
 import 'package:promoteur_immobiier/view/WIdgets/navbar.dart';
+import 'package:promoteur_immobiier/view/auth/login.dart';
 import 'package:promoteur_immobiier/view/screen/projetencours.dart';
 
 import 'EtrePropritaire.dart';
@@ -15,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   List imageList = [
     'assets/s.jpg',
     'assets/s2.jpg',
@@ -186,6 +190,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
+                  FlatButton(
+                      child: Text("logout"),
+                      onPressed: () {
+                        _auth.signOut();
+                        Get.offAll(LoginPage());
+                      }),
                   InkWell(
                     onTap: () {
                       Get.to(() => EtrePropritaire());

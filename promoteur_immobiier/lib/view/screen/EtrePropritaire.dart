@@ -12,13 +12,6 @@ class EtrePropritaire extends StatefulWidget {
 }
 
 class _EtrePropritaireState extends State<EtrePropritaire> {
-  final List<String> appartement = <String>[
-    "Ain marim",
-    "Ain marim",
-    "Ain marim",
-    "Ain marim",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppartementViewModel>(
@@ -26,17 +19,10 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
       builder: (controller) => controller.loading.value
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              body: ListView(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: kMainColor,
-                        border: Border.all(color: Colors.deepPurple)),
-                    height: 130,
-                  ),
-                  _listViewAppartement(),
-                ],
+              appBar: AppBar(
+                backgroundColor: kMainColor,
               ),
+              body: _listViewAppartement(),
             ),
     );
   }
@@ -46,142 +32,142 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
       builder: (controller) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-            height: MediaQuery.of(context).size.height,
-            child: ListView.separated(
-              itemCount: controller.appartementModel.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(DetailApartementEtrePropritaire(
-                        model: controller.appartementModel[index],
-                      ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                ),
+          margin: EdgeInsets.all(5),
+          height: MediaQuery.of(context).size.height,
+          child: ListView.separated(
+            itemCount: controller.appartementModel.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => DetailApartementEtrePropritaire(
+                          model: controller.appartementModel[index],
+                        ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
                               ),
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                ),
-                                child: Image.network(
-                                  controller.appartementModel[index].image,
-                                  fit: BoxFit.cover,
-                                ),
+                            ),
+                            height: 150,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                              ),
+                              child: Image.network(
+                                controller.appartementModel[index].image,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                              width: 205,
-                              height: 150,
-                              child: Stack(
-                                children: [
-                                  SizedBox(
-                                    height: 15,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            width: 205,
+                            height: 150,
+                            child: Stack(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Positioned(
+                                  top: 15,
+                                  child: Text(
+                                    controller.appartementModel[index].type,
+                                    style: TextStyle(
+                                        color: kMainColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 19),
                                   ),
-                                  Positioned(
-                                    top: 15,
-                                    child: Text(
-                                      controller.appartementModel[index].type,
-                                      style: TextStyle(
-                                          color: kMainColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 19),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Positioned(
+                                  top: 60,
+                                  child: Text(
+                                    controller
+                                        .appartementModel[index].residence,
+                                    style: TextStyle(
+                                      color: kSecondaryColor,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Positioned(
-                                    top: 60,
-                                    child: Text(
-                                      controller
-                                          .appartementModel[index].residence,
-                                      style: TextStyle(
-                                        color: kSecondaryColor,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 16,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Positioned(
+                                  bottom: 10,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        controller
+                                            .appartementModel[index].surface,
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20),
                                       ),
-                                    ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        controller.appartementModel[index].prix,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Positioned(
-                                    bottom: 10,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          controller
-                                              .appartementModel[index].surface,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        Text(
-                                          controller
-                                              .appartementModel[index].prix,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                width: 20,
-              ),
-            )),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => SizedBox(
+              width: 20,
+            ),
+          ),
+        ),
       ),
     );
   }
