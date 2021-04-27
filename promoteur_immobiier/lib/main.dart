@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:promoteur_immobiier/view/controlView.dart';
+import 'package:promoteur_immobiier/view/screen/TestPageAccueil.dart';
 import 'helper/binding.dart';
 
 void main() async {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: ControlView(),
+        body: HomePage(),
       ),
       theme: ThemeData(fontFamily: 'SourceSans'),
     );
