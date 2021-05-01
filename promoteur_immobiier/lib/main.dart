@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:promoteur_immobiier/view/auth/CreeUnCompte.dart';
+import 'package:promoteur_immobiier/view/auth/login.dart';
 import 'package:promoteur_immobiier/view/controlView.dart';
+import 'package:promoteur_immobiier/view/screen/EtrePropritaire.dart';
 import 'package:promoteur_immobiier/view/screen/TestPageAccueil.dart';
 import 'helper/binding.dart';
 
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: HomePage(),
+        body: EtrePropritaire(),
       ),
       theme: ThemeData(fontFamily: 'SourceSans'),
     );

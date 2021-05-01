@@ -7,6 +7,7 @@ import 'package:promoteur_immobiier/view/WIdgets/Custom_Text.dart';
 import 'package:promoteur_immobiier/view/WIdgets/navbar.dart';
 import 'package:promoteur_immobiier/view/auth/login.dart';
 import 'package:promoteur_immobiier/view/screen/projetencours.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'EtrePropritaire.dart';
 
@@ -128,10 +129,126 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                            color: Colors.grey,
-                            child: CustomText(
-                                "Construire ensemble ", Colors.white, 20, 1.2)),
+                        Column(
+                          children: [
+                            Container(
+                                color: Colors.grey,
+                                child: CustomText("Construire ensemble ",
+                                    Colors.white, 20, 1.2)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      const url =
+                                          'https://www.facebook.com/AllianceI/';
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage('assets/facebook.gif'),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      const url =
+                                          'https://www.instagram.com/groupeallianceimmobilier/';
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/instagram.gif'),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      const url =
+                                          'https://www.youtube.com/channel/UCbXojON6WrX5_aNeK3wfUJA';
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage('assets/youtube.gif'),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Container(
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    const url =
+                                        'https://l.facebook.com/l.php?u=https%3A%2F%2Fmaps.app.goo.gl%2F3J9AWxH8DRHtnWtr5%3Ffbclid%3DIwAR0rp-nxPQhuXSBr4zk8tTlEiyeanqaBQffWt7txwWcC4bqriI7-mzFZNlk&h=AT2H33UD2PjT5SLRAiDQ9qMuTudPFGlIcqnnkVr8NNn_vUfD3d0O2qKpwaK6ZfRtd_IdAu5V3H7ZW6LQlljNFNmxIkC_9LPeQEKxXKVrjW1SOt0PfvibXCmEiDMN8y0Rujp-EA';
+
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.place,
+                                        color: Colors.white,
+                                        size: 11,
+                                      ),
+                                      CustomText(
+                                          "\nRésidence Lac Médical Center 7 \n ème étage LAC 2, Tunis, Tunisie ",
+                                          Colors.white,
+                                          10,
+                                          1.2),
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -143,50 +260,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/facebook.gif'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/instagram.gif'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/youtube.gif'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  )
-                ],
+                children: [],
               ),
               Column(
                 children: [

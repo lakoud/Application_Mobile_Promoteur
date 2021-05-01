@@ -7,25 +7,6 @@ import '../../constants.dart';
 import 'CreeUnCompte.dart';
 
 class LoginPage extends GetWidget<AuthViewModel> {
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Retour',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _divider() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -132,7 +113,8 @@ class LoginPage extends GetWidget<AuthViewModel> {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => SignUpPage());
+              //  Get.to(() => SignUpPage());
+              Get.offAll(SignUpPage());
             },
             child: Text(
               'S\'inscrire',
@@ -293,7 +275,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
                       onTap: () {
                         _formkey.currentState.save();
                         if (_formkey.currentState.validate()) {
-                          controller.signInWithEmailAndPassword();
+                          //     controller.signInWithEmailAndPassword();
                         }
                       },
                       child: Container(
@@ -335,7 +317,6 @@ class LoginPage extends GetWidget<AuthViewModel> {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
         ],
       ),
     ));

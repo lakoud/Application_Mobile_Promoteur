@@ -12,7 +12,7 @@ class SignUpPage extends GetWidget<AuthViewModel> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Get.off(LoginPage());
+        Get.off(() => LoginPage());
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -49,7 +49,7 @@ class SignUpPage extends GetWidget<AuthViewModel> {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(LoginPage());
+                Get.offAll(LoginPage());
               },
               child: Text(
                 'Connecter',
@@ -139,7 +139,8 @@ class SignUpPage extends GetWidget<AuthViewModel> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Form(
-                  key: _formkey,
+                  key: controller.loginFormKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -172,19 +173,20 @@ class SignUpPage extends GetWidget<AuthViewModel> {
                                 }
                               },
                               child: TextFormField(
-                                  onSaved: (value) {
-                                    controller.name = value;
-                                  },
-                                  validator: (value) {
-                                    if (value == null) {
-                                      print("erreur");
-                                    }
-                                  },
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      fillColor: Color(0xfff3f3f4),
-                                      filled: true)),
+                                controller: controller.nameController,
+                                onSaved: (value) {
+                                  controller.name = value;
+                                },
+                                validator: (value) {
+                                  return controller.validatName(value);
+                                },
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    fillColor: Color(0xfff3f3f4),
+                                    filled: true),
+                                keyboardType: TextInputType.name,
+                              ),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(vertical: 10),
@@ -201,19 +203,19 @@ class SignUpPage extends GetWidget<AuthViewModel> {
                                     height: 10,
                                   ),
                                   TextFormField(
-                                      onSaved: (value) {
-                                        controller.email = value;
-                                      },
-                                      validator: (value) {
-                                        if (value == null) {
-                                          print("erreur");
-                                        }
-                                      },
                                       obscureText: false,
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
                                           fillColor: Color(0xfff3f3f4),
-                                          filled: true))
+                                          filled: true),
+                                      keyboardType: TextInputType.phone,
+                                      controller: controller.emailController,
+                                      onSaved: (value) {
+                                        controller.email = value;
+                                      },
+                                      validator: (value) {
+                                        return controller.validatEmail(value);
+                                      })
                                 ],
                               ),
                             ),
@@ -232,19 +234,19 @@ class SignUpPage extends GetWidget<AuthViewModel> {
                                     height: 10,
                                   ),
                                   TextFormField(
-                                      onSaved: (value) {
-                                        controller.password = value;
-                                      },
-                                      validator: (value) {
-                                        if (value == null) {
-                                          print("erreur");
-                                        }
-                                      },
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
                                           fillColor: Color(0xfff3f3f4),
-                                          filled: true))
+                                          filled: true),
+                                      controller: controller.passwordController,
+                                      onSaved: (value) {
+                                        controller.email = value;
+                                      },
+                                      validator: (value) {
+                                        return controller
+                                            .validatPassword(value);
+                                      })
                                 ],
                               ),
                             ),
@@ -256,10 +258,7 @@ class SignUpPage extends GetWidget<AuthViewModel> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          _formkey.currentState.save();
-                          if (_formkey.currentState.validate()) {
-                            controller.signUpWithEmailAndPassword();
-                          }
+                          //               controller.signUpWithEmailAndPassword();
                         },
                         child: Container(
                           //width: MediaQuery.of(context).size.width,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants.dart';
 
@@ -11,7 +12,7 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,9 +34,20 @@ class _NavState extends State<Nav> {
           label: 'Contacter  ',
         ),
       ],
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       currentIndex: _selectedIndex,
       selectedItemColor: kMainColor,
-      onTap: _onItemTapped,
+      onTap: (index) async {
+        if (index == 0) {
+          const url = 'tel:55591112'; //jarb concatination mta3 deux chain
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Could not launch $url';
+          }
+        }
+      },
     ); // Choose the nav bar style with this property.
   }
 }

@@ -40,8 +40,11 @@ dependencies:
   google_sign_in: ^5.0.2
 
   firebase_auth: ^1.1.2
+  url_launcher: ^6.0.3
+  salomon_bottom_bar: ^3.0.0
+  flutter_icons: ^1.1.0
 
-
+  flutter_screenutil: ^5.0.0
 
 
 
