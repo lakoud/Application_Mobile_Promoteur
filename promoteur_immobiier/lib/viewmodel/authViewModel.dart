@@ -36,6 +36,7 @@ class AuthViewModel extends GetxController {
       idToken: googleSignInAuthentication.idToken,
       accessToken: googleSignInAuthentication.accessToken,
     );
+    Get.offAll(HomePage());
 
     await _auth.signInWithCredential(credential);
   }

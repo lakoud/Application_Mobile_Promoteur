@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,6 +6,7 @@ import 'package:promoteur_immobiier/constants.dart';
 import 'package:promoteur_immobiier/view/WIdgets/bottombar.dart';
 import 'package:promoteur_immobiier/view/WIdgets/inputWidget.dart';
 import 'package:promoteur_immobiier/viewmodel/AppartementViewModel.dart';
+
 import 'DetailEappartementEtreProp.dart';
 
 class EtrePropritaire extends StatefulWidget {
@@ -17,28 +17,6 @@ class EtrePropritaire extends StatefulWidget {
 }
 
 class _EtrePropritaireState extends State<EtrePropritaire> {
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    resultsLoaded = getAppartement();
-  }
-
-  Future resultsLoaded;
-  List _allResult = [];
-  final CollectionReference _appartementCollectionRef =
-      FirebaseFirestore.instance.collection('Appartement');
-
-  getAppartement() async {
-    var value = await _appartementCollectionRef.get();
-
-    setState(() {
-      _allResult = value.docs;
-    });
-
-    return "completd";
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppartementViewModel>(
@@ -98,7 +76,7 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
                             onPressed: () {
                               //     Helper.nextScreen(context, Filters());
                             },
-                            color: primaryColor,
+                            color: kMainColor,
                             child: Row(
                               children: [
                                 Icon(
@@ -161,8 +139,8 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
                                       right: 10.0,
                                       child: InkWell(
                                         child: Container(
-                                          width: 45.0,
-                                          height: 45.0,
+                                          width: 30.0,
+                                          height: 30.0,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Colors.white,
@@ -178,19 +156,35 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
                                       bottom: -15.0,
                                       left: 10.0,
                                       child: Container(
-                                        width: 45.0,
-                                        height: 45.0,
+                                        width: 70.0,
+                                        height: 50.0,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.amber,
-                                        ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            boxShadow: <BoxShadow>[
+                                              BoxShadow(
+                                                  color: Colors.grey.shade200,
+                                                  offset: Offset(2, 4),
+                                                  blurRadius: 5,
+                                                  spreadRadius: 2)
+                                            ],
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  kSecondaryColor,
+                                                  kMainColor
+                                                ])),
                                         child: Center(
-                                          child: Text(
-                                            controller.appartementModel[index]
-                                                .surface,
-                                            style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: Colors.white,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              controller.appartementModel[index]
+                                                  .surface,
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -200,87 +194,104 @@ class _EtrePropritaireState extends State<EtrePropritaire> {
                                 )),
                                 Container(
                                   padding: EdgeInsets.symmetric(vertical: 10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              controller
-                                                  .appartementModel[index].type,
-                                              style: TextStyle(
-                                                fontSize: 17.0,
-                                              ),
+                                  child: Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                  controller
+                                                      .appartementModel[index]
+                                                      .type,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18,
+                                                    fontFamily: "SourceSans",
+                                                    fontWeight: FontWeight.w700,
+                                                  )),
                                             ),
-                                          ),
-                                          Text(
-                                            controller
-                                                .appartementModel[index].prix,
-                                            style: TextStyle(
-                                              fontSize: 17.0,
-                                              color: primaryColor,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5.0,
-                                      ),
-                                      Text(
-                                        "Description resumé",
-                                        style: TextStyle(
-                                          fontSize: 13.0,
-                                          color: Color(0xFF343434),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 5.0,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.place,
-                                            size: 15.0,
-                                            color:
-                                                Color.fromRGBO(255, 136, 0, 1),
-                                          ),
-                                          SizedBox(
-                                            width: 5.0,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
+                                            Text(
                                                 controller
                                                     .appartementModel[index]
-                                                    .residence,
+                                                    .prix,
                                                 style: TextStyle(
-                                                  fontSize: 13.0,
-                                                  color: Color(0xFF343434),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 166,
-                                              ),
-                                              Icon(
-                                                Icons.phone,
-                                                color: Colors.green,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Icon(
-                                                Icons.message,
-                                                color: primaryColor,
-                                              )
-                                            ],
+                                                  fontSize: 18,
+                                                  fontFamily: "SourceSans",
+                                                  fontWeight: FontWeight.w700,
+                                                ))
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Text(
+                                          "Description resumé",
+                                          style: TextStyle(
+                                            fontSize: 13.0,
+                                            color: Color(0xFF343434),
                                           ),
-                                        ],
-                                      )
-                                    ],
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons.place,
+                                                      size: 15.0,
+                                                      color: kMainColor),
+                                                  SizedBox(
+                                                    width: 5.0,
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                        .appartementModel[index]
+                                                        .residence,
+                                                    style: TextStyle(
+                                                      fontSize: 13.0,
+                                                      color: Color(0xFF343434),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailApartementEtrePropritaire()),
+                                                );
+                                              },
+                                              child: Text(
+                                                "Plus de details ",
+                                                style: TextStyle(
+                                                    color: kMainColor),
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailApartementEtrePropritaire()),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.arrow_drop_down,
+                                                  color: kMainColor,
+                                                )),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 )
                               ],

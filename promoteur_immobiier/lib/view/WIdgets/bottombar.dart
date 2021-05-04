@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:promoteur_immobiier/constants.dart';
+import 'package:promoteur_immobiier/view/screen/TestPageAccueil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BottomBar extends StatefulWidget {
   @override
@@ -23,34 +26,48 @@ class _BottomBarState extends State<BottomBar> {
       items: [
         /// Home
         SalomonBottomBarItem(
-          icon: Icon(Icons.home),
-          title: Text("Home"),
-          selectedColor: Colors.orange,
+          icon: GestureDetector(
+              onTap: () {
+                launch("tel:27895765");
+              },
+              child: Icon(Icons.phone)),
+          title: Text("27856858"),
+          selectedColor: kMainColor,
         ),
 
         /// Likes
+
         SalomonBottomBarItem(
-          icon: Icon(Icons.favorite_border),
-          title: Text("Likes"),
-          selectedColor: Colors.orange,
+          icon: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+              child: Icon(Icons.home)),
+          title: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+              child: Text("Home")),
+          selectedColor: kMainColor,
         ),
 
         /// Search
-        SalomonBottomBarItem(
-          icon: Icon(Icons.search),
-          title: Text("Search"),
-          selectedColor: Colors.orange,
-        ),
 
         /// Profile
         SalomonBottomBarItem(
-          icon: Icon(Icons.person),
-          title: Text("Profile"),
-          selectedColor: Colors.orange,
+          icon: Icon(Icons.message),
+          title: Text("message"),
+          selectedColor: kMainColor,
         ),
       ],
     );
   }
 }
 
-enum _SelectedTab { home, likes, search, profile }
+enum _SelectedTab { phone, home, message }

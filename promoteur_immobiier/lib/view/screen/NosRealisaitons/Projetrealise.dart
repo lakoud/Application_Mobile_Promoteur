@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promoteur_immobiier/view/WIdgets/navbar.dart';
-import '../../constants.dart';
+import '../../../constants.dart';
 
 class Realise extends StatelessWidget {
   const Realise({Key key}) : super(key: key);
