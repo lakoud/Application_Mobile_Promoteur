@@ -5,7 +5,6 @@ import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
 import 'package:promoteur_immobiier/modules/etrepropritaire/propritaire.dart';
 import 'package:promoteur_immobiier/modules/projetencours/listeDesProjetEncours.dart';
-import 'package:promoteur_immobiier/modules/projetencours/projetencours.dart';
 import 'package:promoteur_immobiier/modules/projetrealiser/ListProjetRealise.dart';
 import 'package:promoteur_immobiier/sheared/styles/Custom_Text.dart';
 import 'package:url_launcher/url_launcher.dart';

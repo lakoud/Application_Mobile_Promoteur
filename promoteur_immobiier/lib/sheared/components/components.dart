@@ -50,6 +50,7 @@ Widget defaultFormField({
   Function suffixPressed,
 }) =>
     TextFormField(
+        controller: controller,
         keyboardType: type,
         onSaved: (value) {},
         onFieldSubmitted: onSubmit,
@@ -597,8 +598,8 @@ Widget listeMenu({
       ),
     );
 
-void navigateTo(context, widget) =>
-    Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
+void navigateTo(context, widget) => Navigator.pushReplacement(
+    context, MaterialPageRoute(builder: (context) => widget));
 Widget googlebottom() => GestureDetector(
       onTap: () {},
       child: Container(

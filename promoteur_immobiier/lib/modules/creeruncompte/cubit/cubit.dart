@@ -18,18 +18,12 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
       @required String email,
       @required String password}) {
     emit(AppRegisterLodingState());
+
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      userCreate(
-        name: name,
-        uId: value.user.uid,
-        phone: phone,
-        email: email,
-      );
-      emit(AppRegisterSuccessState());
+      userCreate(email: email, name: name, phone: phone, uId: value.user.uid);
     }).catchError((error) {
-      print(error.toString());
       emit(AppRegisterErrorState(error.toString()));
     });
   }
@@ -41,11 +35,11 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
     @required String uId,
   }) {
     UserModel model = UserModel(
-      name: name,
-      email: email,
-      phone: phone,
-      uId: uId,
-    );
+        name: name,
+        email: email,
+        phone: phone,
+        uId: uId,
+        isEmailVerified: false);
 
     FirebaseFirestore.instance
         .collection("users")

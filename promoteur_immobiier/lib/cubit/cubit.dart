@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
 import 'package:promoteur_immobiier/models/projetrealisermodel.dart';
+import 'package:promoteur_immobiier/models/userModel.dart';
 import 'package:promoteur_immobiier/modules/profile/profil.dart';
 import 'package:promoteur_immobiier/modules/home/pageAccueil.dart';
 import 'package:promoteur_immobiier/sheared/components/constants.dart';
@@ -57,6 +58,22 @@ class AppCubit extends Cubit<AppState> {
       emit(GetSuccessProjetEnCours());
     }).catchError((error) {
       emit(GetErrorProjetEnCours(error.toString()));
+    });
+  }
+
+  UserModel model;
+  void getUserData() {
+    emit(AppMessageLoadingState());
+
+    FirebaseFirestore.instance.collection('Users').doc(uId).get().then((value) {
+      print(value.data);
+
+      model = UserModel.fromJson(value.data());
+
+      emit(AppMessageGetUserSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppMessageGetUserErrorState(error.toString()));
     });
   }
 }

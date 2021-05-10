@@ -12,10 +12,12 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
 
   void userLogin({@required String email, @required String password}) {
     emit(ApploginLodingState());
+
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      emit(ApploginSuccessState());
+      print(value.user.email);
+      emit(ApploginSuccessState(value.user.uid));
     }).catchError((error) {
       emit(ApploginErrorState(error.toString()));
     });

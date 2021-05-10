@@ -2,7 +2,9 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:promoteur_immobiier/modules/home/pageAccueil.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
+import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
 import 'package:promoteur_immobiier/modules/creeruncompte/creeUnCompte.dart';
 import 'cubit/cubit.dart';
@@ -31,13 +33,22 @@ class _LoginPageState extends State<LoginPage> {
           listener: (context, state) {
             if (state is ApploginErrorState) {
               Fluttertoast.showToast(
-                  msg: state.error,
+                  msg: "Mot de passe ou email incorrecte",
                   toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
+                  gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,
                   backgroundColor: Colors.red,
                   textColor: Colors.white,
                   fontSize: 16.0);
+            }
+
+            if (state is ApploginSuccessState) {
+              CacheHelper.saveData(
+                key: 'uId',
+                value: state.uId,
+              ).then((value) {
+                navigateTo(context, HomePage());
+              });
             }
           },
           builder: (context, state) {
@@ -122,10 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 .validate()) {
                                               AppLoginCubit.get(context)
                                                 ..userLogin(
-                                                    email: "lako@htma.com",
-                                                    password: "kygouygyuf");
-                                              print(emailController.text);
-                                              print(passwordController.text);
+                                                    email: emailController.text,
+                                                    password: passwordController
+                                                        .text);
                                             }
                                           }),
                                       fallback: (context) => Center(

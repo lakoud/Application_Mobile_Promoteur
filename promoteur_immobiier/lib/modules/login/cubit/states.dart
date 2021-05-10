@@ -4,7 +4,10 @@ class ApploginInitialState extends AppLoginStates {}
 
 class ApploginLodingState extends AppLoginStates {}
 
-class ApploginSuccessState extends AppLoginStates {}
+class ApploginSuccessState extends AppLoginStates {
+  final String uId;
+  ApploginSuccessState(this.uId);
+}
 
 class ApploginErrorState extends AppLoginStates {
   final String error;

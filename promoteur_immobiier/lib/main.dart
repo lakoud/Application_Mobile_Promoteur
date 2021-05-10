@@ -4,31 +4,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
-import 'package:promoteur_immobiier/modules/home/pageAccueil.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
+import 'modules/home/pageAccueil.dart';
 import 'modules/login/login.dart';
 import 'sheared/bloc_observer.dart';
 
 void main() async {
-  Bloc.observer = MyBlocObserver();
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  Bloc.observer = MyBlocObserver();
+  await CacheHelper.init();
+
+  Widget widget;
+  uId = CacheHelper.getData(key: 'uId');
+
+  if (uId != null) {
+    widget = HomePage(); // honi tbadal ed5ol
+  } else {
+    widget = LoginPage();
+  }
+
+  runApp(MyApp(statrtWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
+  final Widget statrtWidget;
+  MyApp({this.statrtWidget});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AppCubit()..getProjetRealiser(),
+          create: (context) => AppCubit()..getUserData(),
         ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginPage(),
+          home: statrtWidget,
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: AppBarTheme(

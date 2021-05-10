@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -33,6 +34,16 @@ class _SignUpPageState extends State<SignUpPage> {
           listener: (context, state) {
             if (state is AppCreateUserSuccessState) {
               navigateTo(context, HomePage());
+            }
+            if (state is AppRegisterErrorState) {
+              Fluttertoast.showToast(
+                  msg: "email non valide",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
             }
           },
           builder: (context, state) {
@@ -109,21 +120,27 @@ class _SignUpPageState extends State<SignUpPage> {
                                             height: 10,
                                           ),
                                           defaultFormField(
-                                            label: "mot de passse",
-                                            icon: Icons.lock,
-                                            isPassword: false,
-                                            validate: (value) {
-                                              if (value.isEmpty) {
-                                                return "mot de passe non valider";
-                                              }
-                                              return null;
-                                            },
-                                            onSubmit: (String value) {
-                                              print(value);
-                                            },
-                                            controller: passwordController,
-                                            type: TextInputType.visiblePassword,
-                                          ),
+                                              suffixPressed: () {
+                                                AppRegisterCubit.get(context)
+                                                    .changePasswordVisibility();
+                                              },
+                                              isPassword:
+                                                  AppRegisterCubit.get(context)
+                                                      .isPasswordShown,
+                                              controller: passwordController,
+                                              label: "Mot de passe",
+                                              icon: Icons.lock,
+                                              suffix:
+                                                  AppRegisterCubit.get(context)
+                                                      .suffix,
+                                              type:
+                                                  TextInputType.visiblePassword,
+                                              validate: (value) {
+                                                if (value.isEmpty) {
+                                                  return "Mot de passe non Valider";
+                                                }
+                                                return null;
+                                              }),
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -146,29 +163,37 @@ class _SignUpPageState extends State<SignUpPage> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          defaultButton(
-                                              text: "S\'inscrire maintenant",
-                                              function: () {
-                                                if (_formkey.currentState
-                                                    .validate()) {
-                                                  AppRegisterCubit.get(context)
-                                                      .userRegister(
-                                                          phone:
-                                                              nomUtilisateurController
-                                                                  .text,
-                                                          name:
-                                                              nomUtilisateurController
-                                                                  .text,
-                                                          email: emailController
-                                                              .value.text,
-                                                          password:
-                                                              passwordController
-                                                                  .value.text);
-                                                  print(emailController.text);
-                                                  print(
-                                                      passwordController.text);
-                                                }
-                                              }),
+                                          ConditionalBuilder(
+                                              condition: state
+                                                  is! AppRegisterLodingState,
+                                              builder: (context) => defaultButton(
+                                                  text: "S\'inscrire maintenant",
+                                                  function: () {
+                                                    if (_formkey.currentState
+                                                        .validate()) {
+                                                      AppRegisterCubit.get(
+                                                              context)
+                                                          .userRegister(
+                                                              phone:
+                                                                  nomUtilisateurController
+                                                                      .text,
+                                                              name:
+                                                                  nomUtilisateurController
+                                                                      .text,
+                                                              email:
+                                                                  emailController
+                                                                      .value
+                                                                      .text,
+                                                              password:
+                                                                  passwordController
+                                                                      .value
+                                                                      .text);
+                                                    }
+                                                  }),
+                                              fallback: (context) => Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  )),
                                           SizedBox(height: 10),
                                           createAccountLabel(
                                               text1:
