@@ -7,6 +7,7 @@ import 'package:promoteur_immobiier/sheared/components/components.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
 import 'package:promoteur_immobiier/modules/creeruncompte/creeUnCompte.dart';
+import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
@@ -147,16 +148,26 @@ class _LoginPageState extends State<LoginPage> {
                                     SizedBox(height: 10),
                                     googlebottom(),
                                     SizedBox(height: 10),
-                                    createAccountLabel(
-                                        text1: "Vous n'avait pas un compte ?",
-                                        text2: "S'inscrire",
-                                        function: () {
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignUpPage()));
-                                        }),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Vous n'avait pas un compte ?",
+                                          style: TextStyle(
+                                              color: kgmail2,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        defaultTextButton(
+                                            text: "S'inscrire",
+                                            function: () {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SignUpPage()));
+                                            }),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),

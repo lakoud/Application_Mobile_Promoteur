@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:promoteur_immobiier/models/AppartmentModel.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 class DetailApartementEtrePropritaire extends StatelessWidget {
+  AppartementrModel model;
+  DetailApartementEtrePropritaire({this.model});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +26,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                              "https://d1qfj231ug7wdu.cloudfront.net/pictures/estate/4628/4627638/9312662665fc95e72bfdb85.61873926_1280.jpg"),
+                          image: NetworkImage(model.photo),
                         ),
                       ),
                     ),
@@ -49,7 +51,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                                 colors: [kSecondaryColor, kMainColor])),
                         child: Center(
                           child: Text(
-                            "5000 m",
+                            model.surface,
                             style: TextStyle(
                               fontSize: 15.0,
                               color: Colors.white,
@@ -69,7 +71,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Text("Appartement S+1",
+                              child: Text(model.typeAppartement,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -77,7 +79,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                                     fontWeight: FontWeight.w700,
                                   )),
                             ),
-                            Text("5000 DT",
+                            Text(model.prix,
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: "SourceSans",
@@ -95,7 +97,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                               width: 5.0,
                             ),
                             Text(
-                              "Residence Ain Mariam",
+                              model.nomDeProjet,
                               style: TextStyle(
                                 fontSize: 15.0,
                                 color: Color(0xFF343434),
@@ -116,7 +118,7 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: Container(
               child: Text(
-                "A vendre un bien à la soukra, limitrophe à une clinique de chirurgie esthétique, idéal pour cabinet médical ou pour habitation, composé de deux niveaux. Un RDC de 74 m2, est composé d’un salon spacieux, une cuisine équipée et une salle d’eau.",
+                model.description,
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -128,9 +130,13 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 300,
-            child: Image.network(
-                "https://i.pinimg.com/originals/06/37/2c/06372cef20d89b57c58bdfc140710c70.png",
-                fit: BoxFit.fill),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(model.plan),
+              ),
+            ),
           ),
         ],
       )),

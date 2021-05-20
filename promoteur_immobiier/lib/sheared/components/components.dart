@@ -43,10 +43,10 @@ Widget defaultFormField({
   Function onSubmit,
   Function onChanged, // si on a un recherche
   @required Function validate,
-  @required bool isPassword,
+  bool isPassword,
   @required String label,
   IconData suffix,
-  IconData icon,
+  @required IconData icon,
   Function suffixPressed,
 }) =>
     TextFormField(
@@ -74,27 +74,17 @@ Widget defaultFormField({
             filled: true)*/
         ));
 
-Widget createAccountLabel({
-  @required String text1,
-  @required String text2,
+Widget defaultTextButton({
+  @required String text,
   @required Function function,
 }) =>
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          text1,
-          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-        ),
-        TextButton(
-          onPressed: function,
-          child: Text(
-            text2,
-            style: TextStyle(
-                color: kgmail2, fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ],
+    TextButton(
+      onPressed: function,
+      child: Text(
+        text,
+        style: TextStyle(
+            color: kgmail2, fontSize: 13, fontWeight: FontWeight.w600),
+      ),
     );
 
 Widget title1() => RichText(
@@ -187,7 +177,7 @@ Widget titreDesPages({
       ),
     );
 
-Widget rechercheEtFiltre() => Padding(
+Widget rechercheEtFiltre({@required Function function}) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
@@ -202,9 +192,7 @@ Widget rechercheEtFiltre() => Padding(
           FlatButton(
             //  height: ScreenUtil().setHeight(44.0),
 
-            onPressed: () {
-              //     Helper.nextScreen(context, Filters());
-            },
+            onPressed: function,
 
             color: kMainColor,
 
@@ -235,13 +223,51 @@ Widget rechercheEtFiltre() => Padding(
     );
 
 // ************************** Les listes ****************************************//
-
+Widget listDesProjet2(
+        {@required String image,
+        @required String residence,
+        @required String description,
+        @required String nappartemnt,
+        @required bool parking,
+        @required String addresse}) =>
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 3.0,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Column(
+          children: [
+            Image.network(
+              "https://img.freepik.com/photos-gratuite/belle-vue-lac-bleu-capture-interieur-villa_181624-10734.jpg?size=338&ext=jpg",
+              fit: BoxFit.cover,
+              width: 390,
+            ),
+            ListTile(
+              title: Text('Residance saada'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                " Residance sada beif fikeror qzesgpzefosdf azeodfazj azdiqsdjqzd Residance sada beif fikeror qzesgpzefosdf azeodfazj azdiqsdjqzd",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
+            Row(children: [
+              Text("Plus de details"),
+              Icon(Icons.arrow_circle_down),
+            ]),
+          ],
+        ),
+      ),
+    );
 Widget listDesProjet(
         {@required String image,
         @required String residence,
         @required String description,
         @required String nappartemnt,
         @required bool parking,
+        @required int ind,
         @required String addresse}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
@@ -252,14 +278,14 @@ Widget listDesProjet(
         itemCount: 5,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemBuilder: (context, index) => Container(
+        itemBuilder: (context, ind) => Container(
           height: MediaQuery.of(context).size.height / 3,
           child: Column(
             children: [
               Expanded(
                   child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
@@ -268,11 +294,20 @@ Widget listDesProjet(
                   ),
                 ),
               )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: Offset(5, 4),
+                        blurRadius: 15,
+                        spreadRadius: 2)
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -373,13 +408,13 @@ Widget title({@required title}) => Text(
       style: TextStyle(color: Colors.black),
     );
 
-Widget listePropritaire({
-  @required String image,
-  @required String surface,
-  @required String type,
-  @required String prix,
-  @required String nomresidance,
-}) =>
+Widget listePropritaire(
+        {@required String image,
+        @required String surface,
+        @required String type,
+        @required String prix,
+        @required String nomresidance,
+        @required int length}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.separated(
@@ -388,7 +423,7 @@ Widget listePropritaire({
             height: 15.0,
           );
         },
-        itemCount: 5,
+        itemCount: length,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
@@ -600,6 +635,7 @@ Widget listeMenu({
 
 void navigateTo(context, widget) => Navigator.pushReplacement(
     context, MaterialPageRoute(builder: (context) => widget));
+
 Widget googlebottom() => GestureDetector(
       onTap: () {},
       child: Container(
@@ -680,5 +716,36 @@ Widget divider({@required text}) => Container(
             width: 20,
           ),
         ],
+      ),
+    );
+Widget defaultAppBar({
+  @required BuildContext context,
+  String title,
+  List<Widget> actions,
+}) =>
+    AppBar(
+      leading: IconButton(
+        onPressed: () {},
+        icon: Icon(Icons.arrow_left),
+      ),
+      titleSpacing: 5.0,
+      title: Text(title),
+      actions: actions,
+    );
+
+Widget customText({
+  @required String text,
+  @required double fontSize,
+  @required Color color,
+  @required double letterSpacing,
+}) =>
+    Container(
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontSize: fontSize,
+          letterSpacing: letterSpacing,
+        ),
       ),
     );

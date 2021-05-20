@@ -26,6 +26,7 @@ class _AppartementEncoursState extends State<AppartementEncours> {
               height: 20,
             ),
             listePropritaire(
+                length: 5,
                 image:
                     "https://immoneuftunisie.com/wp-content/uploads/2017/01/lac_interieur_1.jpg",
                 surface: "150 m",

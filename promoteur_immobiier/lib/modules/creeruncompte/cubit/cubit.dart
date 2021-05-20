@@ -39,6 +39,8 @@ class AppRegisterCubit extends Cubit<AppRegisterStates> {
         email: email,
         phone: phone,
         uId: uId,
+        image:
+            'https://image.freepik.com/photos-gratuite/bouchent-portrait-jolie-jeune-femme-isolee_273609-36523.jpg',
         isEmailVerified: false);
 
     FirebaseFirestore.instance

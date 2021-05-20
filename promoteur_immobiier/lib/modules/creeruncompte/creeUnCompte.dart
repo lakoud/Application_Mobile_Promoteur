@@ -8,6 +8,7 @@ import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.da
 import 'package:promoteur_immobiier/modules/creeruncompte/cubit/cubit.dart';
 import 'package:promoteur_immobiier/modules/creeruncompte/cubit/states.dart';
 import 'package:promoteur_immobiier/modules/login/login.dart';
+import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -195,17 +196,27 @@ class _SignUpPageState extends State<SignUpPage> {
                                                         CircularProgressIndicator(),
                                                   )),
                                           SizedBox(height: 10),
-                                          createAccountLabel(
-                                              text1:
-                                                  "Vous avez déja un compte ?",
-                                              text2: "Connecter",
-                                              function: () {
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            LoginPage()));
-                                              }),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Vous avez déja un compte ?",
+                                                style: TextStyle(
+                                                    color: kgmail2,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              defaultTextButton(
+                                                  text: "Connecter",
+                                                  function: () {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                LoginPage()));
+                                                  }),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),

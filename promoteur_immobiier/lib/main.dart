@@ -3,12 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:promoteur_immobiier/cubit/cubit.dart';
-import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/modules/projetencours/cubit.dart/cubit.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
-import 'modules/home/pageAccueil.dart';
-import 'modules/login/login.dart';
+import 'layout/applayaout.dart';
+import 'modules/etrepropritaire/cubit/cubit.dart';
+import 'modules/projetrealiser/cubit.dart/cubit.dart';
 import 'sheared/bloc_observer.dart';
 
 void main() async {
@@ -17,7 +17,7 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-
+/*
   Widget widget;
   uId = CacheHelper.getData(key: 'uId');
 
@@ -25,25 +25,37 @@ void main() async {
     widget = HomePage(); // honi tbadal ed5ol
   } else {
     widget = LoginPage();
-  }
+  }*/
 
-  runApp(MyApp(statrtWidget: widget));
+  runApp(MyApp(/*statrtWidget: widget*/));
 }
 
 class MyApp extends StatelessWidget {
   final Widget statrtWidget;
   MyApp({this.statrtWidget});
+  String idProjet;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AppCubit()..getUserData(),
-        ),
+            create: (context) => PRCubit()
+              ..getPosts()
+              ..getAdresse()
+              ..getAvantage()
+              ..getEquipement()
+              ..getAppartement(idProjet)),
+        BlocProvider(
+            create: (context) => PCCubit()
+              ..getPosts()
+              ..getAdresse()
+              ..getAvantage()
+              ..getEquipement()),
+        BlocProvider(create: (context) => PropCubit()..getPosts()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: statrtWidget,
+          home: Applayout(),
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: AppBarTheme(
@@ -62,8 +74,9 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                type: BottomNavigationBarType.fixed,
-              ))),
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: Colors.blue,
+                  elevation: 0.0))),
     );
   }
 }

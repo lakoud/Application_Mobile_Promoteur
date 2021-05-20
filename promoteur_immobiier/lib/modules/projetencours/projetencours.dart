@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:promoteur_immobiier/sheared/styles/Custom_Text.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -9,11 +8,7 @@ import 'Appratementencours.dart';
 import 'Avencementdeprojet.dart';
 
 class ProjetEnCours extends StatelessWidget {
-  List imageList = [
-    'assets/s.jpg',
-    'assets/s2.jpg',
-    'assets/s3.jpg',
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -463,7 +458,7 @@ class ProjetEnCours extends StatelessWidget {
     );
   }
 }
-
+/*
 class ListeDesApartement extends StatelessWidget {
   const ListeDesApartement({
     Key key,
@@ -552,5 +547,4 @@ class ListeDesApartement extends StatelessWidget {
                 );
           },
         ));
-  }
-}
+  }*/

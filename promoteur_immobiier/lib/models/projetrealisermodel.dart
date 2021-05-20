@@ -1,21 +1,32 @@
-class ProjetRealiserModel {
+class ProjetModel {
   String nomProjet;
   String nbAppartement;
   String nbEtage;
   String photo;
-
-  ProjetRealiserModel({
+  String description;
+  String plan;
+  String etat;
+  String id;
+  ProjetModel({
     this.nomProjet,
     this.nbAppartement,
     this.nbEtage,
     this.photo,
+    this.description,
+    this.plan,
+    this.etat,
+    this.id,
   });
 
-  ProjetRealiserModel.fromJson(Map<String, dynamic> json) {
+  ProjetModel.fromJson(Map<String, dynamic> json) {
     nomProjet = json['NomProjet'];
     nbAppartement = json['NbAppartement'];
     nbEtage = json['NbEtage'];
-    photo = json['photo'];
+    photo = json['Photo'];
+    description = json['description'];
+    plan = json['plan'];
+    etat = json['Etat'];
+    id = json['uIdProjet'];
   }
 
   Map<String, dynamic> toMap() {
@@ -23,7 +34,11 @@ class ProjetRealiserModel {
       'NomProjet': nomProjet,
       'NbAppartement': nbAppartement,
       'NbEtage': nbEtage,
-      'photo': photo,
+      'Photo': photo,
+      'description': description,
+      'plan': plan,
+      'Etat': etat,
+      'uIdProjet': id,
     };
   }
 }
