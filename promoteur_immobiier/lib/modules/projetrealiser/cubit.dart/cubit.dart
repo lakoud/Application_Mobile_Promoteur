@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:promoteur_immobiier/models/AppartmentModel.dart';
 import 'package:promoteur_immobiier/models/adresseAppartement.dart';
@@ -7,12 +8,14 @@ import 'package:promoteur_immobiier/models/avantageEmplacement.dart';
 import 'package:promoteur_immobiier/models/equipementAppartement.dart';
 import 'package:promoteur_immobiier/models/projetrealisermodel.dart';
 import 'package:promoteur_immobiier/modules/projetrealiser/cubit.dart/states.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
 
 class PRCubit extends Cubit<PRState> {
   PRCubit() : super(PRInitialState());
   static PRCubit get(context) => BlocProvider.of(context);
   List<ProjetModel> PR = [];
   String idProjet;
+
   String getPosts() {
     FirebaseFirestore.instance
         .collection("Projet")
@@ -28,19 +31,6 @@ class PRCubit extends Cubit<PRState> {
       emit(GetPRErrorState(onError.toString()));
     });
     return idProjet;
-  }
-
-  List<AdressseAppartementrModel> ad = [];
-  void getAdresse() {
-    FirebaseFirestore.instance.collection("AdressProjet").get().then((value) {
-      value.docs.forEach((element) {
-        ad.add(AdressseAppartementrModel.fromJson(element.data()));
-      });
-
-      emit(GetPRSuccessState());
-    }).catchError((onError) {
-      emit(GetPRErrorState(onError.toString()));
-    });
   }
 
   List<AvantageEmplacementModel> av = [];

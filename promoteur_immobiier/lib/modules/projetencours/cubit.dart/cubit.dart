@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:promoteur_immobiier/models/adresseAppartement.dart';
 import 'package:promoteur_immobiier/models/avantageEmplacement.dart';
@@ -29,10 +30,10 @@ class PCCubit extends Cubit<PCState> {
   }
 
   List<AdressseAppartementrModel> adresse = [];
-  void getAdresse() {
+  void getAdresse({@required String ref}) {
     FirebaseFirestore.instance
         .collection("AdressProjet")
-        .where("IdProjet", isEqualTo: "t5jlVtANON33tWp7Y0Fk")
+        .where("IdProjet", isEqualTo: ref)
         .get()
         .then((value) {
       value.docs.forEach((element) {

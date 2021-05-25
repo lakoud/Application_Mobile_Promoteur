@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:promoteur_immobiier/models/AppartmentModel.dart';
+import 'package:promoteur_immobiier/models/adresseAppartement.dart';
 import 'package:promoteur_immobiier/modules/projetrealiser/cubit.dart/states.dart';
 import 'package:promoteur_immobiier/modules/projetrealiser/pr_apartement.dart';
 import 'package:promoteur_immobiier/modules/projetrealiser/projetRealiser.dart';
@@ -59,13 +61,9 @@ class ListProjetRealise extends StatelessWidget {
                                     color: kMainColor,
                                   ),
                                   GestureDetector(
-                                    onTap: () {
-                                      launch(PRCubit.get(context)
-                                          .ad[index]
-                                          .lienMap);
-                                    },
+                                    onTap: () {},
                                     child: Text(
-                                      "Rue ${PRCubit.get(context).ad[index].rue}- ${PRCubit.get(context).ad[index].ville}- ${PRCubit.get(context).ad[index].pays}",
+                                      "helo",
                                       style: TextStyle(
                                           color: Colors.black.withOpacity(0.6)),
                                     ),

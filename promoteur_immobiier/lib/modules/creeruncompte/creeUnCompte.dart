@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:promoteur_immobiier/layout/applayaout.dart';
 import 'package:promoteur_immobiier/modules/home/pageAccueil.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
@@ -34,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
         child: BlocConsumer<AppRegisterCubit, AppRegisterStates>(
           listener: (context, state) {
             if (state is AppCreateUserSuccessState) {
-              navigateTo(context, HomePage());
+              navigateTo(context, Applayout());
             }
             if (state is AppRegisterErrorState) {
               Fluttertoast.showToast(

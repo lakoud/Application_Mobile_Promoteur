@@ -83,12 +83,11 @@ class _HomePageState extends State<HomePage> {
           listener: (context, state) {},
           builder: (context, state) {
             var cubit = AppCubit.get(context);
-            return Scaffold(
-              // resizeToAvoidBottomInset: false,
-              body: SafeArea(
-                  child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            return SafeArea(
+              child: Scaffold(
+                // resizeToAvoidBottomInset: false,
+                body: ListView(
+                  //  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       height: 500,
@@ -305,7 +304,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-              )),
+              ),
             );
           },
         ));

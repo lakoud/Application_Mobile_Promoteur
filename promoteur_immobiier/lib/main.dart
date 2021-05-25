@@ -1,15 +1,20 @@
-import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/modules/projetencours/cubit.dart/cubit.dart';
+import 'package:promoteur_immobiier/modules/projetrealiser/recherche/bloc/search_states.dart';
+import 'package:promoteur_immobiier/sheared/bloc_observer.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 import 'layout/applayaout.dart';
 import 'modules/etrepropritaire/cubit/cubit.dart';
+import 'modules/login/login.dart';
 import 'modules/projetrealiser/cubit.dart/cubit.dart';
-import 'sheared/bloc_observer.dart';
+import 'modules/projetrealiser/recherche/bloc/search_bloc.dart';
+import 'modules/projetrealiser/recherche/data/search_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,17 +22,17 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-/*
+
   Widget widget;
   uId = CacheHelper.getData(key: 'uId');
 
   if (uId != null) {
-    widget = HomePage(); // honi tbadal ed5ol
+    widget = Applayout(); // honi tbadal ed5ol
   } else {
     widget = LoginPage();
-  }*/
+  }
 
-  runApp(MyApp(/*statrtWidget: widget*/));
+  runApp(MyApp(statrtWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
@@ -38,10 +43,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => AppCubit()),
         BlocProvider(
             create: (context) => PRCubit()
               ..getPosts()
-              ..getAdresse()
               ..getAvantage()
               ..getEquipement()
               ..getAppartement(idProjet)),
@@ -52,10 +57,14 @@ class MyApp extends StatelessWidget {
               ..getAvantage()
               ..getEquipement()),
         BlocProvider(create: (context) => PropCubit()..getPosts()),
+        BlocProvider<SearchBloc>(
+          create: (context) => SearchBloc(InitState(), SearchRepository()),
+        ),
       ],
       child: MaterialApp(
+          title: 'Allience Groupe ',
           debugShowCheckedModeBanner: false,
-          home: Applayout(),
+          home: statrtWidget,
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: AppBarTheme(

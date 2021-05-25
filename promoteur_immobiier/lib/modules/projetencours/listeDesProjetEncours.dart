@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:promoteur_immobiier/models/adresseAppartement.dart';
 import 'package:promoteur_immobiier/modules/projetencours/cubit.dart/cubit.dart';
 import 'package:promoteur_immobiier/modules/projetencours/cubit.dart/states.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
@@ -57,7 +59,7 @@ class ListProjetEnCours extends StatelessWidget {
                                   GestureDetector(
                                     onTap: () {},
                                     child: Text(
-                                      "Rue ${PCCubit.get(context).adresse[index].rue}- ${PCCubit.get(context).adresse[index].ville}- ${PCCubit.get(context).adresse[index].pays}",
+                                      "r",
                                       style: TextStyle(
                                           color: Colors.black.withOpacity(0.6)),
                                     ),
