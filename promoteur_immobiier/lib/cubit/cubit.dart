@@ -16,6 +16,7 @@ import 'package:promoteur_immobiier/modules/favorites/favorite.dart';
 import 'package:promoteur_immobiier/modules/login/login.dart';
 import 'package:promoteur_immobiier/modules/home/pageAccueil.dart';
 import 'package:promoteur_immobiier/modules/profile/profil2.dart';
+import 'package:promoteur_immobiier/sheared/components/components.dart';
 import 'package:promoteur_immobiier/sheared/components/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
@@ -90,6 +91,29 @@ class AppCubit extends Cubit<AppState> {
     emit(AppBottomNavState());
   }
 
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  void loginWithPhone() {
+    FirebaseAuth.instance.verifyPhoneNumber(
+      timeout: const Duration(seconds: 60),
+      phoneNumber: '+216 55 591 112',
+      verificationCompleted: (PhoneAuthCredential credential) {
+        auth.signInWithCredential(credential);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        emit(ApploginErrorState(e.toString()));
+
+        if (e.code == 'invalid-phone-number') {
+          print('The provided phone number is not valid.');
+        }
+      },
+      codeSent: (String verificationId, int resendToken) {
+        emit(Appscreeenverifstate());
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
   var id;
   void userLogin({@required String email, @required String password}) {
     emit(ApploginLodingState());
@@ -100,6 +124,7 @@ class AppCubit extends Cubit<AppState> {
       id = value.user.uid;
       print(value.user.email);
       // honi ynavi
+
       emit(ApploginSuccessState(value.user.uid));
     }).catchError((error) {
       emit(ApploginErrorState(error.toString()));
