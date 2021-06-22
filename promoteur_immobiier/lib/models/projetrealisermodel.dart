@@ -1,4 +1,10 @@
+import 'package:flutter/cupertino.dart';
+
 class ProjetModel {
+  List<String> favories;
+  List<String> key;
+  String apartire;
+  String porcentage;
   String nomProjet;
   String nbAppartement;
   String nbEtage;
@@ -7,7 +13,14 @@ class ProjetModel {
   String plan;
   String etat;
   String id;
+  String livreson;
+  Color color;
   ProjetModel({
+    this.apartire,
+    this.key,
+    this.livreson,
+    this.porcentage,
+    this.favories,
     this.nomProjet,
     this.nbAppartement,
     this.nbEtage,
@@ -19,6 +32,9 @@ class ProjetModel {
   });
 
   ProjetModel.fromJson(Map<String, dynamic> json) {
+    apartire = json['apartire'];
+    livreson = json['livreson'];
+    porcentage = json['porcentage'];
     nomProjet = json['NomProjet'];
     nbAppartement = json['NbAppartement'];
     nbEtage = json['NbEtage'];
@@ -27,10 +43,16 @@ class ProjetModel {
     plan = json['plan'];
     etat = json['Etat'];
     id = json['uIdProjet'];
+    favories = json["favories"] == null
+        ? []
+        : json["favories"].map<String>((i) => i as String).toList();
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'apartire': apartire,
+      'livreson': livreson,
+      'porcentage': porcentage,
       'NomProjet': nomProjet,
       'NbAppartement': nbAppartement,
       'NbEtage': nbEtage,
@@ -39,6 +61,8 @@ class ProjetModel {
       'plan': plan,
       'Etat': etat,
       'uIdProjet': id,
+      "favories": favories,
+      'key': key,
     };
   }
 }

@@ -1,9 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:promoteur_immobiier/modules/etrepropritaire/detailEappartementEtreProp.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
-import '../inputWidget.dart';
+
+Widget titreDesPages({
+  @required String titre,
+}) =>
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        titre,
+        style: TextStyle(
+          fontSize: 25.0,
+          fontWeight: FontWeight.w800,
+          color: blackColor,
+        ),
+      ),
+    );
 
 Widget defaultButton({
   double width = double.infinity,
@@ -11,9 +25,10 @@ Widget defaultButton({
   color2 = kSecondaryColor,
   @required String text,
   @required Function function,
+  @required double height = 60.0,
 }) =>
     Container(
-      height: 40.0,
+      height: height,
       width: width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -77,20 +92,24 @@ Widget defaultFormField({
 Widget defaultTextButton({
   @required String text,
   @required Function function,
+  @required context,
 }) =>
     TextButton(
       onPressed: function,
       child: Text(
         text,
-        style: TextStyle(
-            color: kgmail2, fontSize: 13, fontWeight: FontWeight.w600),
+        style: GoogleFonts.habibi(
+          textStyle: Theme.of(context).textTheme.bodyText1,
+          fontSize: 15,
+          color: kgmail2,
+        ),
       ),
     );
 
 Widget title1() => RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'a',
+          text: 'A',
           style: GoogleFonts.portLligatSans(
             //  textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 30,
@@ -162,27 +181,15 @@ Widget backButton({
       ),
     );
 
-Widget titreDesPages({
-  @required String titre,
-}) =>
+Widget rechercheEtFiltre(
+        {@required Function function, @required Function functionr}) =>
     Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        titre,
-        style: TextStyle(
-          fontSize: 25.0,
-          fontWeight: FontWeight.w800,
-          color: blackColor,
-        ),
-      ),
-    );
-
-Widget rechercheEtFiltre({@required Function function}) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
               child: InputWidget(
+                  function: functionr,
                   height: 44.0,
                   hintText: "Recherche",
                   prefixIcon: Icons.search)),
@@ -261,338 +268,10 @@ Widget listDesProjet2(
         ),
       ),
     );
-Widget listDesProjet(
-        {@required String image,
-        @required String residence,
-        @required String description,
-        @required String nappartemnt,
-        @required bool parking,
-        @required int ind,
-        @required String addresse}) =>
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
-          height: 15.0,
-        ),
-        itemCount: 5,
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, ind) => Container(
-          height: MediaQuery.of(context).size.height / 3,
-          child: Column(
-            children: [
-              Expanded(
-                  child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      image,
-                    ),
-                  ),
-                ),
-              )),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.grey.shade200,
-                        offset: Offset(5, 4),
-                        blurRadius: 15,
-                        spreadRadius: 2)
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(residence,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontFamily: "SourceSans",
-                                    fontWeight: FontWeight.w700,
-                                  )),
-                            ),
-                            Icon(
-                              Icons.house,
-                              size: 20,
-                            ),
-                            Text("${nappartemnt}",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: "SourceSans",
-                                  fontWeight: FontWeight.w700,
-                                )),
-                            if (parking == true)
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.local_parking,
-                                    size: 20,
-                                  ),
-                                ],
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          description,
-                          style: TextStyle(
-                            fontSize: 13.0,
-                            color: Color(0xFF343434),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Icon(Icons.place,
-                                      size: 15.0, color: kMainColor),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(
-                                    addresse,
-                                    style: TextStyle(
-                                      fontSize: 13.0,
-                                      color: Color(0xFF343434),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                "Plus de details ",
-                                style: TextStyle(color: kMainColor),
-                              ),
-                            ),
-                            GestureDetector(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: kMainColor,
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
 
 Widget title({@required title}) => Text(
       title,
       style: TextStyle(color: Colors.black),
-    );
-
-Widget listePropritaire(
-        {@required String image,
-        @required String surface,
-        @required String type,
-        @required String prix,
-        @required String nomresidance,
-        @required int length}) =>
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 15.0,
-          );
-        },
-        itemCount: length,
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: MediaQuery.of(context).size.height / 3,
-            child: Column(
-              children: [
-                Expanded(
-                    child: Stack(
-                  overflow: Overflow.visible,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(image),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 10.0,
-                      right: 10.0,
-                      child: InkWell(
-                        child: Container(
-                          width: 30.0,
-                          height: 30.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -15.0,
-                      left: 10.0,
-                      child: Container(
-                        width: 70.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: Colors.grey.shade200,
-                                  offset: Offset(2, 4),
-                                  blurRadius: 5,
-                                  spreadRadius: 2)
-                            ],
-                            gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [kSecondaryColor, kMainColor])),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              surface,
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(type,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontFamily: "SourceSans",
-                                    fontWeight: FontWeight.w700,
-                                  )),
-                            ),
-                            Text(prix,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: "SourceSans",
-                                  fontWeight: FontWeight.w700,
-                                ))
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          "Description resumé",
-                          style: TextStyle(
-                            fontSize: 13.0,
-                            color: Color(0xFF343434),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Icon(Icons.place,
-                                      size: 15.0, color: kMainColor),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(
-                                    nomresidance,
-                                    style: TextStyle(
-                                      fontSize: 13.0,
-                                      color: Color(0xFF343434),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DetailApartementEtrePropritaire()),
-                                );
-                              },
-                              child: Text(
-                                "Plus de details ",
-                                style: TextStyle(color: kMainColor),
-                              ),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DetailApartementEtrePropritaire()),
-                                  );
-                                },
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: kMainColor,
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-      ),
     );
 
 Widget listeMenu({
@@ -635,9 +314,15 @@ Widget listeMenu({
 
 void navigateTo(context, widget) => Navigator.pushReplacement(
     context, MaterialPageRoute(builder: (context) => widget));
-
-Widget googlebottom() => GestureDetector(
-      onTap: () {},
+void navigat(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => widget),
+    );
+Widget googlebottom({
+  @required Function function,
+}) =>
+    GestureDetector(
+      onTap: function,
       child: Container(
         height: 50,
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -649,19 +334,17 @@ Widget googlebottom() => GestureDetector(
             Expanded(
               flex: 1,
               child: Container(
-                decoration: BoxDecoration(
-                  color: kgmail2,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)),
-                ),
-                alignment: Alignment.center,
-                child: Text('G',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w400)),
-              ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(5),
+                        topLeft: Radius.circular(5)),
+                  ),
+                  alignment: Alignment.center,
+                  child: FaIcon(
+                    FontAwesomeIcons.google,
+                    color: kgmail2,
+                  )),
             ),
             Expanded(
               flex: 5,
@@ -722,10 +405,11 @@ Widget defaultAppBar({
   @required BuildContext context,
   String title,
   List<Widget> actions,
+  @required Function fonction,
 }) =>
     AppBar(
       leading: IconButton(
-        onPressed: () {},
+        onPressed: fonction,
         icon: Icon(Icons.arrow_left),
       ),
       titleSpacing: 5.0,
@@ -749,3 +433,59 @@ Widget customText({
         ),
       ),
     );
+
+class InputWidget extends StatefulWidget {
+  final String hintText;
+  final IconData prefixIcon;
+  final double height;
+  @required
+  Function function;
+  InputWidget(
+      {this.hintText, this.prefixIcon, this.height = 53.0, this.function});
+
+  @override
+  _InputWidgetState createState() => _InputWidgetState();
+}
+
+class _InputWidgetState extends State<InputWidget> {
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //height: ScreenUtil().setHeight(height),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      padding: EdgeInsets.only(
+        right: 16.0,
+        left: this.widget.prefixIcon == null ? 16.0 : 0.0,
+      ),
+      child: TextFormField(
+        onChanged: widget.function,
+        controller: _searchController,
+        decoration: InputDecoration(
+          prefixIcon: this.widget.prefixIcon == null
+              ? null
+              : Icon(
+                  this.widget.prefixIcon,
+                  color: Color.fromRGBO(105, 108, 121, 1),
+                ),
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          hintText: this.widget.hintText,
+          hintStyle: TextStyle(
+            fontSize: 14.0,
+            color: Color.fromRGBO(105, 108, 121, 1),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,13 +1,21 @@
+import 'package:conditional_builder/conditional_builder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
-import 'package:promoteur_immobiier/modules/etrepropritaire/propritaire.dart';
-import 'package:promoteur_immobiier/modules/profile/profil2.dart';
-import 'package:promoteur_immobiier/modules/projetencours/listeDesProjetEncours.dart';
-import 'package:promoteur_immobiier/modules/projetrealiser/ListProjetRealise.dart';
+import 'package:promoteur_immobiier/modules/Projet_en_cours/liste_projet_en_cours.dart';
+import 'package:promoteur_immobiier/modules/Projet_realiser/liste_projet_realiser.dart';
+import 'package:promoteur_immobiier/modules/appartement/aVendre/avendre.dart';
+import 'package:promoteur_immobiier/modules/login/login.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
 
@@ -77,20 +85,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => AppCubit(),
-        child: BlocConsumer<AppCubit, AppState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            var cubit = AppCubit.get(context);
-            return SafeArea(
-              child: Scaffold(
-                // resizeToAvoidBottomInset: false,
-                body: ListView(
+    return Builder(builder: (context) {
+      AppCubit.get(context).getcoordonner();
+      return BlocConsumer<AppCubit, AppState>(
+        listener: (context, state) async {
+          if (state is ApplogoutErrorState) {
+            Fluttertoast.showToast(
+                msg: "Erreur",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER_LEFT,
+                timeInSecForIosWeb: 1,
+                textColor: Colors.white,
+                fontSize: 90.0);
+          }
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: Scaffold(
+              body: ConditionalBuilder(
+                builder: (context) => ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   //  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 500,
+                      height: MediaQuery.of(context).size.height * .6,
                       child: Stack(
                         children: [
                           Container(
@@ -116,6 +134,41 @@ class _HomePageState extends State<HomePage> {
                           ),
                           AppBar(
                             backgroundColor: Colors.transparent,
+                            actions: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextButton(
+                                    onPressed: () {
+                                      AppCubit.get(context).userLogout();
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()));
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(Icons.logout_outlined,
+                                            color: Colors.white),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text(
+                                          "Déconnexion",
+                                          style: GoogleFonts.merriweather(
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                            fontSize: 11,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )
+                            ],
                           ),
                           Positioned(
                             top: 190,
@@ -136,37 +189,49 @@ class _HomePageState extends State<HomePage> {
                                     height: 20,
                                   ),
                                   Container(
-                                      color: Colors.grey,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius:
+                                              BorderRadiusDirectional.only(
+                                            bottomStart: Radius.circular(10.0),
+                                            topEnd: Radius.circular(10.0),
+                                            topStart: Radius.circular(10.0),
+                                          )),
                                       child: Center(
-                                        child: customText(
-                                            text: "Construire ensemble ",
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            letterSpacing: 1.2),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: customText(
+                                              text: "Construire ensemble ",
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              letterSpacing: 1.2),
+                                        ),
                                       )),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      launch(
-                                          "https://l.facebook.com/l.php?u=https%3A%2F%2Fmaps.app.goo.gl%2F3J9AWxH8DRHtnWtr5%3Ffbclid%3DIwAR0KLBeei9XLdaw7c-mMjOKVaPSTlhvGq0Z-9zDvLDLU0NU4eCqItY46ehQ&h=AT0yfxlWGwt0x4KOaUURNbKu79cGQgZB5tEyuZS1UlJnuisfxASRJi5iOASIgupOyhhifuYaRi53A0D7K75dyayPZkBsnIVt6Bs2KQKCCHhEDeeKZAZ6JGpAh8iaUrgBGPO_sA");
+                                      launch(AppCubit.get(context)
+                                          .cordonner
+                                          .lienmap);
                                     },
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        FaIcon(
                                           Icons.place,
                                           color: Colors.white,
-                                          size: 15,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
+                                          size: 13,
                                         ),
                                         Text(
-                                          "Résidence Lac Médical Center 7 ème étage LAC 2, Tunis, Tunisie",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.white),
+                                          "${AppCubit.get(context).cordonner.residence} ${AppCubit.get(context).cordonner.rue}, ${AppCubit.get(context).cordonner.ville}, ${AppCubit.get(context).cordonner.pays}",
+                                          style: GoogleFonts.merriweather(
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -176,68 +241,51 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            launch(
-                                                "https://www.facebook.com/AllianceI/");
-                                          },
-                                          child: Container(
-                                            height: 30.0,
-                                            width: 30.0,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/facebokicon.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
+                                      IconButton(
+                                          iconSize: 20,
+                                          visualDensity:
+                                              VisualDensity.comfortable,
+                                          icon: Icon(
+                                            FontAwesomeIcons.phoneAlt,
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          onTap: () {
+                                          onPressed: () {
                                             launch(
-                                                "https://www.instagram.com/groupeallianceimmobilier/");
+                                                "tel:${AppCubit.get(context).cordonner.numphone}");
                                           },
-                                          child: Container(
-                                            height: 30.0,
-                                            width: 30.0,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/insta.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
+                                          color: Colors.white),
+                                      IconButton(
+                                          iconSize: 20,
+                                          icon: Icon(
+                                            FontAwesomeIcons.facebookF,
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            launch(
-                                                "https://www.youtube.com/channel/UCbXojON6WrX5_aNeK3wfUJA");
+                                          onPressed: () {
+                                            launch(AppCubit.get(context)
+                                                .cordonner
+                                                .llienfb);
                                           },
-                                          child: Container(
-                                            height: 30.0,
-                                            width: 30.0,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/youtubeIcon.png'),
-                                                fit: BoxFit.fill,
-                                              ),
-                                              shape: BoxShape.circle,
-                                            ),
+                                          color: Colors.white),
+                                      IconButton(
+                                          iconSize: 20,
+                                          icon: Icon(
+                                            FontAwesomeIcons.instagram,
                                           ),
+                                          onPressed: () {
+                                            launch(AppCubit.get(context)
+                                                .cordonner
+                                                .lieninstgrame);
+                                          },
+                                          color: Colors.white),
+                                      IconButton(
+                                        iconSize: 20,
+                                        color: Colors.white,
+                                        icon: Icon(
+                                          FontAwesomeIcons.youtube,
                                         ),
+                                        onPressed: () {
+                                          launch(AppCubit.get(context)
+                                              .cordonner
+                                              .lienyoutube);
+                                        },
                                       ),
                                     ],
                                   ),
@@ -276,9 +324,9 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ListePropritaire()));
+                                                ListeAppartementAVendre()));
                                   },
-                                  child: listeMenu(titre: "Etre propritaire")),
+                                  child: listeMenu(titre: "Être propriétaire")),
                               InkWell(
                                   onTap: () {
                                     Navigator.push(
@@ -287,14 +335,15 @@ class _HomePageState extends State<HomePage> {
                                             builder: (context) =>
                                                 ListProjetEnCours()));
                                   },
-                                  child: listeMenu(titre: "Projet en cours")),
+                                  child:
+                                      listeMenu(titre: "Nos projet en cours")),
                               InkWell(
                                   onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ListProjetRealise()));
+                                                ListProjetRealiser()));
                                   },
                                   child: listeMenu(titre: "Nos réalisations")),
                             ],
@@ -304,9 +353,15 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
+                fallback: (context) => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                condition: state is AppGetCordonnerSuccessState,
               ),
-            );
-          },
-        ));
+            ),
+          );
+        },
+      );
+    });
   }
 }

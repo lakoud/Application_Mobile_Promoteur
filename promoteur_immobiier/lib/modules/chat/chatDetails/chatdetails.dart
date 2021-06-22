@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
 import 'package:promoteur_immobiier/models/messageModel.dart';
@@ -18,26 +19,21 @@ class ChatDetails extends StatelessWidget {
     return Builder(
       builder: (context) {
         AppCubit.get(context)
-            .getMessage(reciverId: "hhxD3nP8sBYMADgD0cL4hVGzkVg2");
+            .getMessage(reciverId: "7dw6lw4Dnogig88ofCXqLj0gV2w2");
         return BlocConsumer<AppCubit, AppState>(
           listener: (context, state) {},
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                titleSpacing: 0.0,
-                title: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 20.0,
-                      backgroundImage: NetworkImage(
-                          "https://scontent.ftun4-1.fna.fbcdn.net/v/t1.6435-1/p160x160/120253793_328733324872508_6721364453949901830_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=7206a8&_nc_ohc=laGqxSwPIVUAX9g78xY&_nc_ht=scontent.ftun4-1.fna&tp=6&oh=be413284c083f00a3cb277c540167aae&oe=60D06A7A"),
-                    ),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Text("alliance")
-                  ],
-                ),
+                elevation: 1.0,
+                titleSpacing: -30.0,
+                title: Container(
+                    width: 250,
+                    height: 250,
+                    child: Image(
+                        image: NetworkImage(
+                      "https://www.entreprises-magazine.com/wp-content/uploads/2020/04/Groupe-Alliance.png",
+                    ))),
               ),
               body: ConditionalBuilder(
                 condition: AppCubit.get(context).messages.length >= 0,
@@ -52,9 +48,9 @@ class ChatDetails extends StatelessWidget {
                             var message = AppCubit.get(context).messages[index];
                             if (AppCubit.get(context).usermodel.uId ==
                                 message.senderId) {
-                              return buildMyMessage(message);
+                              return buildMyMessage(message, context);
                             } else {
-                              return buildMessage(message);
+                              return buildMessage(message, context);
                             }
                           },
                           separatorBuilder: (context, states) => SizedBox(
@@ -82,14 +78,15 @@ class ChatDetails extends StatelessWidget {
                             ),
                             Container(
                               height: 50,
-                              color: kSecondaryColor,
+                              color: kMainColor,
                               child: MaterialButton(
                                 onPressed: () {
                                   print('fff');
                                   AppCubit.get(context).sendMessage(
-                                      reciverId: "hhxD3nP8sBYMADgD0cL4hVGzkVg2",
+                                      reciverId: "7dw6lw4Dnogig88ofCXqLj0gV2w2",
                                       dateTime: DateTime.now().toString(),
                                       text: messageController.text);
+                                  messageController.clear();
                                   print(messageController.text);
                                 },
                                 minWidth: 1,
@@ -116,20 +113,27 @@ class ChatDetails extends StatelessWidget {
     );
   }
 
-  Widget buildMessage(MessageModel model) => Align(
+  Widget buildMessage(MessageModel model, context) => Align(
         alignment: AlignmentDirectional.centerStart,
         child: Container(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: kMainColor,
                 borderRadius: BorderRadiusDirectional.only(
                   bottomEnd: Radius.circular(10.0),
                   topEnd: Radius.circular(10.0),
                   topStart: Radius.circular(10.0),
                 )),
-            child: Text(model.text)),
+            child: Text(
+              model.text,
+              style: GoogleFonts.merriweather(
+                textStyle: Theme.of(context).textTheme.bodyText1,
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            )),
       );
-  Widget buildMyMessage(MessageModel model) => Align(
+  Widget buildMyMessage(MessageModel model, context) => Align(
         alignment: AlignmentDirectional.centerEnd,
         child: Container(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -140,6 +144,13 @@ class ChatDetails extends StatelessWidget {
                   topEnd: Radius.circular(10.0),
                   topStart: Radius.circular(10.0),
                 )),
-            child: Text(model.text)),
+            child: Text(
+              model.text,
+              style: GoogleFonts.aBeeZee(
+                textStyle: Theme.of(context).textTheme.subtitle1,
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            )),
       );
 }

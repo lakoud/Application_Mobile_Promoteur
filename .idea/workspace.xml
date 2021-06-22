@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ffa79cb4-241c-408c-9bc8-f9ece4ebcdb8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/cubit/cubit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/cubit/state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/cubit/state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/models/userModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/models/userModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/creeruncompte/cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/creeruncompte/cubit/cubit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/creeruncompte/cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/creeruncompte/cubit/states.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/login/cubit/cubit.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/login/cubit/states.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/login/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/login/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/profile/profil2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/promoteur_immobiier/lib/modules/profile/profil2.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1t4ZOObsZdO3UEwD7QUXWqGCeiB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffa79cb4-241c-408c-9bc8-f9ece4ebcdb8" name="Default Changelist" comment="" />
+      <created>1622030289105</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622030289105</updated>
+    </task>
+    <servers />
+  </component>
+</project>

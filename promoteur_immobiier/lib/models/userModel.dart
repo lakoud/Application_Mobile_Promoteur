@@ -6,15 +6,18 @@ class UserModel {
   String uId;
   String image;
   bool isEmailVerified;
-  UserModel({
-    this.email,
-    this.mptDePasse,
-    this.name,
-    this.phone,
-    this.uId,
-    this.isEmailVerified,
-    this.image,
-  });
+
+  List<String> key;
+
+  UserModel(
+      {this.email,
+      this.mptDePasse,
+      this.name,
+      this.phone,
+      this.uId,
+      this.isEmailVerified,
+      this.image,
+      this.key});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -34,7 +37,8 @@ class UserModel {
       'nom': name,
       'uId': uId,
       'isEmailVerified': isEmailVerified,
-      'image': image
+      'image': image,
+      "key": key,
     };
   }
 }

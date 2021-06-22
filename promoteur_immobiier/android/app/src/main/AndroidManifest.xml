@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.promoteur_immobiier">
    <application
-        android:label="promoteur_immobiier"
+        android:label="Alliance Groupe"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

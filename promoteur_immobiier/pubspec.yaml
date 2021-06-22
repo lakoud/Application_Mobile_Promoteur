@@ -33,6 +33,10 @@ dependencies:
   dio: ^4.0.0
   shared_preferences: ^2.0.5
   image_picker: ^0.7.4
+  flutter_icons: ^1.1.0
+  flutter_screenutil: ^5.0.0+2
+  rect_getter: ^1.0.0
+
   cloud_firestore: ^1.0.6
   firebase_core: ^1.1.0
   google_sign_in: ^5.0.2

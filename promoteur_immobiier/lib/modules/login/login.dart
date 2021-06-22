@@ -1,15 +1,15 @@
 import 'package:conditional_builder/conditional_builder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
 import 'package:promoteur_immobiier/layout/applayaout.dart';
-import 'package:promoteur_immobiier/modules/profile/profil2.dart';
+import 'package:promoteur_immobiier/modules/creeruncompte/creeUnCompte%20.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
-import 'package:promoteur_immobiier/modules/creeruncompte/creeUnCompte.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -37,11 +37,10 @@ class _LoginPageState extends State<LoginPage> {
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
+              backgroundColor: kgmail1,
+              textColor: kgmail2,
               fontSize: 16.0);
         }
-
         if (state is ApploginSuccessState) {
           CacheHelper.saveData(
             key: 'uId',
@@ -143,18 +142,22 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(height: 10),
                                 divider(text: "OU"),
                                 SizedBox(height: 10),
-                                googlebottom(),
+                                googlebottom(function: () {
+                                  AppCubit.get(context).loginGoogle();
+                                }),
                                 SizedBox(height: 10),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Vous n'avait pas un compte ?",
                                       style: TextStyle(
-                                          color: kgmail2,
+                                          color: Colors.black,
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     defaultTextButton(
+                                        context: context,
                                         text: "S'inscrire",
                                         function: () {
                                           Navigator.pushReplacement(
@@ -173,8 +176,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Positioned(
-                    top: 40, left: 0, child: backButton(function: () {})),
               ],
             ),
           ),
