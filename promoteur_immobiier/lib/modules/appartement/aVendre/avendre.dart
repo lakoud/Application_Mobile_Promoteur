@@ -6,6 +6,7 @@ import 'package:promoteur_immobiier/cubit/state.dart';
 import 'package:promoteur_immobiier/modules/appartement/aVendre/filtre.dart';
 import 'package:promoteur_immobiier/modules/appartement/detailEappartementEtreProp.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 class ListeAppartementAVendre extends StatefulWidget {

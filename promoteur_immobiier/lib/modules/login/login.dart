@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
-import 'package:promoteur_immobiier/layout/applayaout.dart';
 import 'package:promoteur_immobiier/modules/creeruncompte/creeUnCompte%20.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/sheared/layout/applayaout.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
@@ -45,9 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           CacheHelper.saveData(
             key: 'uId',
             value: state.uId,
-          ).then((value) {
-            navigateTo(context, Applayout());
-          });
+          ).then((value) {});
         }
       },
       builder: (context, state) {
@@ -133,6 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 email: emailController.text,
                                                 password:
                                                     passwordController.text);
+                                          uId = FirebaseAuth
+                                              .instance.currentUser.uid;
+                                          navigateTo(context, Applayout());
                                         }
                                       }),
                                   fallback: (context) => Center(
@@ -142,8 +145,22 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(height: 10),
                                 divider(text: "OU"),
                                 SizedBox(height: 10),
-                                googlebottom(function: () {
+                                googlebottom(function: () async {
+                                  /* await SharedPreferences.getInstance()
+                                    ..remove('uId');*/
+
+                                  print("final");
+                                  print(uId);
+
                                   AppCubit.get(context).loginGoogle();
+                                  GoogleSignIn googleSignIn =
+                                      GoogleSignIn(scopes: ['email']);
+
+                                  final GoogleSignInAccount googleUser =
+                                      await googleSignIn.signIn();
+                                  uId = googleUser.id;
+                                  print(uId);
+                                  navigateTo(context, Applayout());
                                 }),
                                 SizedBox(height: 10),
                                 Row(

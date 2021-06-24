@@ -82,6 +82,42 @@ class _ToggleButtons1State extends State<ToggleButtons1> {
     });
   }
 
+  List _avantageTypes = [
+    "Tunis",
+    "Sfax",
+    "Sousse",
+    "Kairouan",
+    "Bizerte",
+    "Gabés",
+    "Hammamet",
+    "Nabeul",
+    "Ariana",
+    "Tozeur",
+    "Monastir",
+    "Mahdia",
+    "Tataouine",
+    "Gafsa",
+    "Tbarka",
+    "Béja",
+    'Jendouba'
+  ];
+
+  List<DropdownMenuItem<String>> _dropDownMenuintville;
+  String _ville;
+  List<DropdownMenuItem<String>> getDropDownMenuintville() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String numero in _avantageTypes) {
+      items.add(new DropdownMenuItem(value: numero, child: new Text(numero)));
+    }
+    return items;
+  }
+
+  void changedDropDownItemville(String selectedCity) {
+    setState(() {
+      _ville = selectedCity;
+    });
+  }
+
   List<dynamic> addtolistprix() {
     List _intTypes = [];
     int i = 40000;
@@ -109,6 +145,9 @@ class _ToggleButtons1State extends State<ToggleButtons1> {
 
   @override
   void initState() {
+    //ville
+    _dropDownMenuintville = getDropDownMenuintville();
+    _ville = null;
     //Etage
     _dropDownMenuintNbEtage = getDropDownMenuintNbEtage();
     _currentSurface = null;
@@ -143,9 +182,10 @@ class _ToggleButtons1State extends State<ToggleButtons1> {
                     //  height: ScreenUtil().setHeight(44.0),
 
                     onPressed: () {
-                      navigateTo(
+                      navigat(
                           context,
                           ListeAppartementAVendre(
+                            ville: _ville,
                             prix: prix,
                             type: p,
                             surface1: _currentSurface2,
@@ -389,9 +429,9 @@ class _ToggleButtons1State extends State<ToggleButtons1> {
                               color: kMainColor,
                               size: 15,
                             ),
-                            value: _currentSurface2,
-                            items: _dropDownMenuintNbEtage2,
-                            onChanged: changedDropDownItemNbetage2,
+                            value: _ville,
+                            items: _dropDownMenuintville,
+                            onChanged: changedDropDownItemville,
                           ),
                         ),
                         Expanded(child: SizedBox()),

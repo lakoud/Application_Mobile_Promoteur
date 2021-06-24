@@ -98,6 +98,16 @@ class _HomePageState extends State<HomePage> {
                 textColor: Colors.white,
                 fontSize: 90.0);
           }
+          if (state is ApplogoutSuccessState) {
+            await SharedPreferences.getInstance()
+              ..remove('uId');
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+
+            print("dfghj");
+            print(FirebaseAuth.instance.currentUser.uid);
+            print(uId);
+          }
         },
         builder: (context, state) {
           return SafeArea(
@@ -140,11 +150,6 @@ class _HomePageState extends State<HomePage> {
                                 child: TextButton(
                                     onPressed: () {
                                       AppCubit.get(context).userLogout();
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
                                     },
                                     child: Row(
                                       mainAxisAlignment:

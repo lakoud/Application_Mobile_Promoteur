@@ -10,12 +10,14 @@ import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 
 class ListeAppartementAVendre extends StatelessWidget {
   ListeAppartementAVendre(
-      {this.type,
+      {this.ville,
+      this.type,
       this.prix,
       this.surface1,
       this.surface2,
       this.currentprix,
       this.currentprix2});
+  String ville;
   String type;
   String surface1;
   String surface2;
@@ -25,6 +27,7 @@ class ListeAppartementAVendre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppCubit.get(context).getresultat(
+        ville: ville,
         type: type,
         prix: prix,
         surface1: surface1,
@@ -45,37 +48,6 @@ class ListeAppartementAVendre extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(child: SizedBox()),
-                    FlatButton(
-                      //  height: ScreenUtil().setHeight(44.0),
-
-                      onPressed: () {
-                        navigateTo(context, ToggleButtons1());
-                      },
-
-                      color: kMainColor,
-
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.subject_sharp,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text(
-                            "Filters",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    )
                   ],
                 ),
                 SizedBox(
@@ -110,9 +82,8 @@ class ListeAppartementAVendre extends StatelessWidget {
                               children: [
                                 Text(
                                     "Appartement ${AppCubit.get(context).appartemntavendreResultat[index].typeAppartement}"),
-                                Text(AppCubit.get(context)
-                                    .appartemntavendreResultat[index]
-                                    .prix)
+                                Text(
+                                    "${AppCubit.get(context).appartemntavendreResultat[index].prix} TND")
                               ],
                             ),
                             subtitle: Row(
@@ -132,9 +103,7 @@ class ListeAppartementAVendre extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        AppCubit.get(context)
-                                            .appartemntavendreResultat[index]
-                                            .nomDeProjet, //  "Rue ${PRCubit.get(context).ad[index].rue}- ${PRCubit.get(context).ad[index].ville}- ${PRCubit.get(context).ad[index].pays}",
+                                        "${AppCubit.get(context).appartemntavendreResultat[index].nomDeProjet}-${AppCubit.get(context).appartemntavendreResultat[index].ville}", //  "Rue ${PRCubit.get(context).ad[index].rue}- ${PRCubit.get(context).ad[index].ville}- ${PRCubit.get(context).ad[index].pays}",
                                         style: TextStyle(
                                             color:
                                                 Colors.black.withOpacity(0.6)),

@@ -63,7 +63,13 @@ class AppCubit extends Cubit<AppState> {
   Widget widget;
   //bnsba lel mochkla mta3 tt7al wa7da ba3d lo5ra tajm t3ml deux listes t7ot fihom si non
   void chageBottomNavBar(int index) {
-    getUserData();
+    if (index == 0) {
+      getcoordonner();
+    }
+    if (index == 1 || index == 2 || index == 3) {
+      getUserData();
+    }
+
     currentIndex = index;
     emit(AppBottomNavState());
   }
@@ -546,7 +552,8 @@ class AppCubit extends Cubit<AppState> {
   List<AppartementrModel> appartemntavendreResultat = [];
 
   void getresultat(
-      {@required String type,
+      {@required String ville,
+      @required String type,
       @required bool prix,
       @required String surface1,
       @required String currentprix,
@@ -556,6 +563,7 @@ class AppCubit extends Cubit<AppState> {
       ..collection("Appartement")
           .where('aVendre', isEqualTo: 'Oui')
           .where('typeAppartement', isEqualTo: type)
+          .where('ville', isEqualTo: ville)
           .where('surface', isLessThanOrEqualTo: surface1)
           .where('surface', isGreaterThanOrEqualTo: surface2)
           .where('prix', isLessThanOrEqualTo: currentprix2)
@@ -605,7 +613,9 @@ class AppCubit extends Cubit<AppState> {
 
   List<AppartementrModel> favoriteappartemntavendre = [];
   void favoriteappartemntAvendre() {
-    emit(GetappartmentAvendreloding());
+    getUserData();
+    appartemntAvendre();
+    emit(GetappartmentAvendrefavoriteloding());
     FirebaseFirestore.instance
         .collection('users')
         .doc(usermodel.uId)
@@ -617,7 +627,7 @@ class AppCubit extends Cubit<AppState> {
         favoriteappartemntavendre
             .add(AppartementrModel.fromJson(element.data()));
       });
-      emit(GetappartmentAvendresuccuss());
+      emit(GetappartmentAvendrefavsuccuss());
     });
   }
 

@@ -2,15 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:promoteur_immobiier/cubit/bloc.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
-import 'package:promoteur_immobiier/cubit/state.dart';
-import 'package:promoteur_immobiier/models/searchRepositiry.dart';
 import 'package:promoteur_immobiier/sheared/bloc_observer.dart';
 import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/sheared/layout/applayaout.dart';
 import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
-import 'layout/applayaout.dart';
 import 'modules/login/login.dart';
 
 void main() async {
@@ -28,7 +25,6 @@ void main() async {
   } else {
     widget = LoginPage();
   }
-  print(uId);
 
   runApp(MyApp(statrtWidget: widget));
 }
@@ -44,13 +40,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => AppCubit()
+              ..getUserData()
               ..projetListsEnRealiser()
               ..appartemntAvendre()
-              ..getUserData()
               ..getcoordonner()),
-        BlocProvider<SearchBloc>(
-            create: (context) =>
-                SearchBloc(AppInitialState(), SearchRepository())),
       ],
       child: MaterialApp(
           title: 'Alliance Groupe ',
@@ -83,11 +76,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/*   initialRoute: '/PageAccuiel',
-        routes: {
-          '/PageAccuiel': (context) => HomePage(),
-          '/Realise': (context) => Realise(),
-          '/ProjetEncours': (context) => ProjetEnCours(),
-          '/login': (context) => LoginPage(),
-        }*/

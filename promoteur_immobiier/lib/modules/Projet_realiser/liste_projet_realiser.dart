@@ -57,117 +57,127 @@ class _ListProjetRealiserState extends State<ListProjetRealiser> {
   Widget buildChatItem(ProjetModel model2) {
     return Container(
         // height: MediaQuery.of(context).size.height / 3,
-        child: Stack(
-      children: [
-        Card(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 250,
-                child: Image.network(
-                  model2.photo,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              ListTile(
-                title: Text(model2.nomProjet),
-                subtitle: Builder(builder: (context) {
-                  return Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Text(
-                                model2.nbAppartement,
-                                style: GoogleFonts.merriweather(
-                                  textStyle:
-                                      Theme.of(context).textTheme.bodyText1,
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                "Appartements",
-                                style: GoogleFonts.alata(
-                                  textStyle:
-                                      Theme.of(context).textTheme.bodyText1,
-                                  fontSize: 13,
-                                  color: kMainColor,
-                                ),
-                              )
-                            ],
+        child: Card(
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 250,
+            child: Image.network(
+              model2.photo,
+              fit: BoxFit.cover,
+            ),
+          ),
+          ListTile(
+            title: Text(model2.nomProjet),
+            subtitle: Builder(builder: (context) {
+              return Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          Text(
+                            model2.nbAppartement,
+                            style: GoogleFonts.merriweather(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 13,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Text(
-                                model2.nbEtage,
-                                style: GoogleFonts.merriweather(
-                                  textStyle:
-                                      Theme.of(context).textTheme.bodyText1,
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                "Etage",
-                                style: GoogleFonts.alata(
-                                  textStyle:
-                                      Theme.of(context).textTheme.bodyText1,
-                                  fontSize: 13,
-                                  color: kMainColor,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(child: SizedBox()),
-                      ],
+                          Text(
+                            "Appartements",
+                            style: GoogleFonts.alata(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 13,
+                              color: kMainColor,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  );
-                }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Text(
-                  model2.description,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      child: Row(
+                        children: [
+                          Text(
+                            model2.nbEtage,
+                            style: GoogleFonts.merriweather(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 13,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            "Etage",
+                            style: GoogleFonts.alata(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 13,
+                              color: kMainColor,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                    if (model2.apartire == 'Prix à consulter')
+                      Container(
+                        child: Text(
+                          model2.apartire,
+                          style: GoogleFonts.merriweather(
+                            textStyle: Theme.of(context).textTheme.bodyText1,
+                            fontSize: 13,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    if (model2.apartire != 'Prix à consulter')
+                      Container(
+                        child: Text(
+                          'À partir de ${model2.apartire} TND',
+                          style: GoogleFonts.merriweather(
+                            textStyle: Theme.of(context).textTheme.bodyText1,
+                            fontSize: 13,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-              ),
-              ButtonBar(
-                alignment: MainAxisAlignment.end,
-                children: [
-                  FlatButton(
-                    textColor: kMainColor,
-                    onPressed: () {
-                      navigateTo(context, Projetrealiser(projet: model2));
-                      // Perform some action
-                    },
-                    child: const Text('Plus de details'),
-                  ),
-                ],
+              );
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: Text(
+              model2.description,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            ),
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.end,
+            children: [
+              FlatButton(
+                textColor: kMainColor,
+                onPressed: () {
+                  navigat(context, Projetrealiser(projet: model2));
+                  // Perform some action
+                },
+                child: const Text('Plus de details'),
               ),
             ],
           ),
-        ),
-        Positioned(
-          top: 10.0,
-          right: 10.0,
-          child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: IconButton(
-                  onPressed: () {}, icon: FaIcon(FontAwesomeIcons.heart))),
-        ),
-      ],
+        ],
+      ),
     ));
   }
 }

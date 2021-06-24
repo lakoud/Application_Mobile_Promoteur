@@ -61,7 +61,7 @@ class ProjetEnCours extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  navigateTo(
+                                  navigat(
                                       context,
                                       ListeAppartement(
                                         projet: projet,

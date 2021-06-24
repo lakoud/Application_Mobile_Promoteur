@@ -1,12 +1,13 @@
 import 'package:conditional_builder/conditional_builder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
-import 'package:promoteur_immobiier/layout/applayaout.dart';
 import 'package:promoteur_immobiier/sheared/components/components.dart';
-import 'package:promoteur_immobiier/sheared/network/local/cach_helper.dart';
+import 'package:promoteur_immobiier/sheared/components/constants.dart';
+import 'package:promoteur_immobiier/sheared/layout/applayaout.dart';
 import 'package:promoteur_immobiier/sheared/styles/LoginDesing/containerlogin.dart';
 import 'package:promoteur_immobiier/modules/login/login.dart';
 
@@ -33,14 +34,6 @@ class _SignUpPageState extends State<SignUpPage> {
         create: (context) => AppCubit(),
         child: BlocConsumer<AppCubit, AppState>(
           listener: (context, state) {
-            if (state is AppCreateUserSuccessState) {
-              CacheHelper.saveData(
-                key: 'uId',
-                value: state.uId,
-              ).then((value) {
-                navigateTo(context, Applayout());
-              });
-            }
             if (state is AppRegisterErrorState) {
               Fluttertoast.showToast(
                   msg: "Email non valide",
@@ -186,6 +179,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                                           password:
                                                               passwordController
                                                                   .value.text);
+                                                      uId = FirebaseAuth
+                                                          .instance
+                                                          .currentUser
+                                                          .uid;
+                                                      navigateTo(
+                                                          context, Applayout());
                                                     }
                                                   }),
                                               fallback: (context) => Center(

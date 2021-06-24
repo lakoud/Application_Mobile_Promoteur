@@ -1,5 +1,4 @@
 import 'package:promoteur_immobiier/models/projetrealisermodel.dart';
-import 'package:promoteur_immobiier/models/userModel.dart';
 
 abstract class AppState {}
 
@@ -180,10 +179,19 @@ class AppLodinggetequipemnts extends AppState {}
 class AppErrorgetequipemnts extends AppState {}
 
 //appartment a vendre
+class Getappartementfavoriterreur extends AppState {}
+
+class Getappartementfavoritlodiing extends AppState {}
+
+class Getappartementfavoritsuccess extends AppState {}
 
 class GetappartmentAvendreloding extends AppState {}
 
 class GetappartmentAvendresuccuss extends AppState {}
+
+class GetappartmentAvendrefavoriteloding extends AppState {}
+
+class GetappartmentAvendrefavsuccuss extends AppState {}
 //Search projet en cours
 
 class LoadingStatz extends AppState {}

@@ -47,6 +47,8 @@ class AppartementrModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'pays': pays,
+      'ville': ville,
       'idAppartment': idAppartment,
       'plan': plan,
       'typeAppartement': typeAppartement,
@@ -57,7 +59,7 @@ class AppartementrModel {
       'prix': prix,
       'surface': surface,
       'IdProjet': uIdProjet,
-      'numeroEtage': numeroEtage,
+      'numetage': numeroEtage,
     };
   }
 }

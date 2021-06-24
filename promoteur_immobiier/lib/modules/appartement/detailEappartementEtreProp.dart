@@ -115,15 +115,26 @@ class DetailApartementEtrePropritaire extends StatelessWidget {
                               ),
                             ),
                             Expanded(child: SizedBox()),
-                            Text(
-                              " ${appartement.numeroEtage} éme étage",
-                              style: GoogleFonts.merriweather(
-                                textStyle:
-                                    Theme.of(context).textTheme.bodyText1,
-                                fontSize: 15,
-                                color: Colors.black,
+                            if (appartement.numeroEtage != '1')
+                              Text(
+                                " ${appartement.numeroEtage} éme étage",
+                                style: GoogleFonts.merriweather(
+                                  textStyle:
+                                      Theme.of(context).textTheme.bodyText1,
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
                               ),
-                            )
+                            if (appartement.numeroEtage == '1')
+                              Text(
+                                " ${appartement.numeroEtage} ére étage",
+                                style: GoogleFonts.merriweather(
+                                  textStyle:
+                                      Theme.of(context).textTheme.bodyText1,
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                ),
+                              )
                           ],
                         ),
                       ],

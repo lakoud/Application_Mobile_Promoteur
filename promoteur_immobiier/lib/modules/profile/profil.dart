@@ -5,8 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
-import 'package:promoteur_immobiier/modules/profile/otpScreen.dart';
-import 'package:promoteur_immobiier/sheared/components/components.dart';
 import 'package:promoteur_immobiier/modules/profile/edit_profile/edit_profile.dart';
 import 'package:promoteur_immobiier/sheared/styles/colors.dart';
 

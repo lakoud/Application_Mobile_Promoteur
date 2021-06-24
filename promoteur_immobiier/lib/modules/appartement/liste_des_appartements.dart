@@ -47,7 +47,18 @@ class ListeAppartement extends StatelessWidget {
                             children: [
                               Text(
                                   "Appartement ${AppCubit.get(context).appartement[index].typeAppartement}"),
-                              Text('Prix à consulter')
+                              if (AppCubit.get(context)
+                                      .appartement[index]
+                                      .prix !=
+                                  'Prix à consulter')
+                                Text(
+                                    "${AppCubit.get(context).appartement[index].prix}TND"),
+                              if (AppCubit.get(context)
+                                      .appartement[index]
+                                      .prix ==
+                                  'Prix à consulter')
+                                Text(
+                                    "${AppCubit.get(context).appartement[index].prix}")
                             ],
                           ),
                           subtitle: Row(
@@ -64,7 +75,7 @@ class ListeAppartement extends StatelessWidget {
                                       width: 5,
                                     ),
                                     Text(
-                                      "Dar El Melk-${AppCubit.get(context).adresse.ville}-${AppCubit.get(context).adresse.pays}", //  "Rue ${PRCubit.get(context).ad[index].rue}- ${PRCubit.get(context).ad[index].ville}- ${PRCubit.get(context).ad[index].pays}",
+                                      "${projet.nomProjet}-${AppCubit.get(context).adresse.ville}-${AppCubit.get(context).adresse.pays}", //  "Rue ${PRCubit.get(context).ad[index].rue}- ${PRCubit.get(context).ad[index].ville}- ${PRCubit.get(context).ad[index].pays}",
                                       style: TextStyle(
                                           color: Colors.black.withOpacity(0.6)),
                                     ),

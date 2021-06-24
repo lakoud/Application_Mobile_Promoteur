@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:promoteur_immobiier/cubit/cubit.dart';
 import 'package:promoteur_immobiier/cubit/state.dart';
@@ -141,7 +140,7 @@ class _ListProjetEnCoursState extends State<ListProjetEnCours> {
                       if (model2.apartire != 'Prix à consulter')
                         Container(
                           child: Text(
-                            '${model2.apartire} TND',
+                            'À partir de ${model2.apartire} TND',
                             style: GoogleFonts.merriweather(
                               textStyle: Theme.of(context).textTheme.bodyText1,
                               fontSize: 13,
@@ -169,7 +168,7 @@ class _ListProjetEnCoursState extends State<ListProjetEnCours> {
                 FlatButton(
                   textColor: kMainColor,
                   onPressed: () {
-                    navigateTo(context, ProjetEnCours(projet: model2));
+                    navigat(context, ProjetEnCours(projet: model2));
                     // Perform some action
                   },
                   child: const Text('Plus de details'),
