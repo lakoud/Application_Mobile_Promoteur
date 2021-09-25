@@ -31,26 +31,19 @@ class _HomePageState extends State<HomePage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'A',
+          text: 'W',
           style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme.of(context).textTheme.bodyText1,
             fontSize: 50,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
           children: [
             TextSpan(
-              text: 'll',
+              text: 'C',
               style: TextStyle(color: Colors.white, fontSize: 40),
             ),
-            TextSpan(
-              text: 'ian',
-              style: TextStyle(color: Colors.white, fontSize: 40),
-            ),
-            TextSpan(
-              text: 'ce',
-              style: TextStyle(color: Colors.white, fontSize: 40),
-            ),
+        
           ]),
     );
   }
@@ -61,7 +54,7 @@ class _HomePageState extends State<HomePage> {
       text: TextSpan(
           text: 'g',
           style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme.of(context).textTheme.bodyText1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
             color: Colors.white,

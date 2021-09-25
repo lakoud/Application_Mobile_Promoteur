@@ -109,7 +109,7 @@ Widget defaultTextButton({
 Widget title1() => RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'A',
+          text: 'W',
           style: GoogleFonts.portLligatSans(
             //  textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 30,
@@ -118,17 +118,10 @@ Widget title1() => RichText(
           ),
           children: [
             TextSpan(
-              text: 'll',
+              text: 'C',
               style: TextStyle(color: kSecondaryColor, fontSize: 30),
             ),
-            TextSpan(
-              text: 'ian',
-              style: TextStyle(color: kMainColor, fontSize: 30),
-            ),
-            TextSpan(
-              text: 'ce',
-              style: TextStyle(color: kSecondaryColor, fontSize: 30),
-            ),
+          
           ]),
     );
 
